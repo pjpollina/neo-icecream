@@ -1,0 +1,4 @@
+{
+  // Hide gitignored files
+  "explorer.excludeGitIgnore": true
+}

@@ -1,0 +1,44 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Ice Cream Machine"
+config/description="A Godot 4.0 remake of the classic Neopets game, Ice Cream Machine."
+config/features=PackedStringArray("4.0", "GL Compatibility")
+run/max_fps=60
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="res://assets/icons/icon.webp"
+config/windows_native_icon="res://assets/icons/icon.ico"
+
+[debug]
+
+file_logging/enable_file_logging=true
+settings/stdout/print_fps=true
+settings/stdout/print_gpu_profile=true
+gdscript/warnings/shadowed_variable=0
+gdscript/warnings/integer_division=0
+
+[display]
+
+window/size/viewport_width=600
+window/size/viewport_height=800
+window/size/resizable=false
+
+[input_devices]
+
+pen_tablet/driver.windows="winink"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
