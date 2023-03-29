@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://game_objects/projectiles/scoop.gd" id="1_v802b"]
 [ext_resource type="Texture2D" uid="uid://d28twtgr684hw" path="res://assets/sprites/scoops.webp" id="2_5wkjs"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xq2fn"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_w3q2b"]
 size = Vector2(64, 64)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1vu75"]
@@ -15,10 +15,10 @@ radius = 25.0
 script = ExtResource("1_v802b")
 metadata/_edit_group_ = true
 
-[node name="Fullsize" type="CollisionShape2D" parent="."]
-position = Vector2(32, 32)
-shape = SubResource("RectangleShape2D_xq2fn")
-debug_color = Color(0, 0.6, 0, 0.419608)
+[node name="Fullsize" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.447059, 1, 0.34902)
+texture = SubResource("PlaceholderTexture2D_w3q2b")
+centered = false
 metadata/_edit_lock_ = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
