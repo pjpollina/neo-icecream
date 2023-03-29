@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://i50qdbt4xp2k"]
+
+[ext_resource type="Script" path="res://game_objects/menus/game_over.gd" id="1_nqakm"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ahiwi"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nqakm")
+
+[node name="Background" type="TextureRect" parent="."]
+self_modulate = Color(0.662745, 0, 0, 0.372549)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_ahiwi")
+
+[node name="Text" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.5
+offset_top = -51.0
+offset_right = 206.5
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 72
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 100.0
+offset_top = 484.0
+offset_right = 500.0
+offset_bottom = 515.0
+alignment = 1
+
+[node name="PlayAgain" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Play Again"
+
+[node name="ReturnToTitle" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Return to Title"
+
+[connection signal="pressed" from="Buttons/PlayAgain" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="Buttons/ReturnToTitle" to="." method="_on_return_to_title_pressed"]

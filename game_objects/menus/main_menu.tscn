@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4oaxvwyqgqc8"]
+
+[ext_resource type="Script" path="res://game_objects/menus/main_menu.gd" id="1_bqkwv"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ahiwi"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2ix04"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bqkwv")
+
+[node name="Background" type="TextureRect" parent="."]
+self_modulate = Color(0.556863, 0.396078, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_ahiwi")
+
+[node name="Title" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 100.0
+offset_right = 200.0
+offset_bottom = 280.0
+grow_horizontal = 2
+texture = SubResource("PlaceholderTexture2D_2ix04")
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TopRow" type="HBoxContainer" parent="Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="Instructions" type="Button" parent="Buttons/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "View Instructions"
+
+[node name="StartGame" type="Button" parent="Buttons/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start Game"
+
+[node name="ToggleMusic" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(198, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Turn Music Off"
+
+[connection signal="pressed" from="Buttons/TopRow/Instructions" to="." method="_on_instructions_pressed"]
+[connection signal="pressed" from="Buttons/TopRow/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Buttons/ToggleMusic" to="." method="_on_toggle_music_pressed"]
