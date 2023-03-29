@@ -3,3 +3,6 @@
 
 # Not important right now
 *.import
+
+# Krita generated
+*~

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqa48e8ilcndk"]
+
+[ext_resource type="Script" path="res://game_objects/player/player.gd" id="1_dykij"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dqe7"]
+size = Vector2(64, 64)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_shksd"]
+size = Vector2(52, 60)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3pws"]
+radius = 26.0
+height = 60.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_dykij")
+
+[node name="Fullsize" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_4dqe7")
+debug_color = Color(0, 0.6, 0.266667, 0.419608)
+
+[node name="Placeholder" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0.45098, 1)
+texture = SubResource("PlaceholderTexture2D_shksd")
+offset = Vector2(32, 32)
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("CapsuleShape2D_y3pws")
+debug_color = Color(0.992157, 0, 0.247059, 0.419608)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5mexxt3t5ok"]
+
+[ext_resource type="Script" path="res://game_objects/projectiles/shooter.gd" id="1_7ky70"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4g51o"]
+size = Vector2(576, 64)
+
+[node name="Shooter" type="Node2D"]
+position = Vector2(12, 600)
+script = ExtResource("1_7ky70")
+
+[node name="Positions" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 64, 0, 128, 0, 192, 0, 256, 0, 320, 0, 384, 0, 448, 0, 512, 0)
+width = 0.0
+
+[node name="ShotHolder" type="Node" parent="."]
+
+[node name="DebugVisual" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.717647, 0.443137, 0.498039)
+show_behind_parent = true
+texture = SubResource("PlaceholderTexture2D_4g51o")
+centered = false

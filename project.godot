@@ -12,6 +12,7 @@ config_version=5
 
 config/name="Ice Cream Machine"
 config/description="A Godot 4.0 remake of the classic Neopets game, Ice Cream Machine."
+run/main_scene="res://game_objects/scenes/game.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 run/max_fps=60
 boot_splash/show_image=false
@@ -23,8 +24,6 @@ config/windows_native_icon="res://assets/icons/icon.ico"
 [debug]
 
 file_logging/enable_file_logging=true
-settings/stdout/print_fps=true
-settings/stdout/print_gpu_profile=true
 gdscript/warnings/shadowed_variable=0
 gdscript/warnings/integer_division=0
 
@@ -34,6 +33,10 @@ window/size/viewport_width=600
 window/size/viewport_height=800
 window/size/resizable=false
 
+[editor]
+
+movie_writer/movie_file="C:/Users/PJ/Videos/Godot/icm.avi"
+
 [input_devices]
 
 pen_tablet/driver.windows="winink"
@@ -42,3 +45,4 @@ pen_tablet/driver.windows="winink"
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/canvas_textures/default_texture_filter=0

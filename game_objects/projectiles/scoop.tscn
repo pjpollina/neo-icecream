@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbtd580lkshji"]
+
+[ext_resource type="Script" path="res://game_objects/projectiles/scoop.gd" id="1_v802b"]
+[ext_resource type="Texture2D" uid="uid://d28twtgr684hw" path="res://assets/sprites/scoops.webp" id="2_5wkjs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xq2fn"]
+size = Vector2(64, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1vu75"]
+resource_local_to_scene = true
+resource_name = "Hurtbox"
+radius = 25.0
+
+[node name="Scoop" type="Area2D"]
+script = ExtResource("1_v802b")
+metadata/_edit_group_ = true
+
+[node name="Fullsize" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_xq2fn")
+debug_color = Color(0, 0.6, 0, 0.419608)
+metadata/_edit_lock_ = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_5wkjs")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="Hurtbox" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("CircleShape2D_1vu75")
+debug_color = Color(0.964706, 0, 0.290196, 0.419608)
+metadata/_edit_lock_ = true
