@@ -27,4 +27,10 @@ func _on_scoop_outta_here():
   score += 5
 
 func _on_load_sequence_donezo():
+  $Popup.show()
+  $Popup/ShowSFX.play()
+
+func _on_popup_dismissed():
+  $Popup.hide()
+  $Popup/HideSFX.play()
   $Shooter.prepare()

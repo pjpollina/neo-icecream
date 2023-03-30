@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://codingvrcbg31"]
+[gd_scene load_steps=6 format=3 uid="uid://codingvrcbg31"]
 
 [ext_resource type="PackedScene" uid="uid://drfpw0pttiuut" path="res://game_objects/player/player.tscn" id="1_ev5gp"]
 [ext_resource type="Script" path="res://game_objects/scenes/game.gd" id="1_sqkp8"]
+[ext_resource type="PackedScene" uid="uid://bp4sp0d6br1fg" path="res://game_objects/menus/popup.tscn" id="4_1kqce"]
 [ext_resource type="PackedScene" uid="uid://c5mexxt3t5ok" path="res://game_objects/projectiles/shooter.tscn" id="4_rencn"]
 
 [sub_resource type="GDScript" id="GDScript_0x85f"]
@@ -29,8 +30,12 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = SubResource("GDScript_0x85f")
 
+[node name="Popup" parent="." instance=ExtResource("4_1kqce")]
+visible = false
+
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
 [connection signal="splattered" from="Player" to="." method="_on_player_splattered"]
 [connection signal="donezo" from="Shooter/LoadSequence" to="." method="_on_load_sequence_donezo"]
+[connection signal="dismissed" from="Popup" to="." method="_on_popup_dismissed"]
 
 [editable path="Shooter"]
