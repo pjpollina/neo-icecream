@@ -5,8 +5,8 @@ signal donezo
 @onready var points = get_parent().get_node("Positions").points
 var index: int = 0
 
-var firerate: float = 0.1875  # Cooldown between loads
-var cooldown: float = 0.0     # Delta timer
+var firerate: float = 0.1  # Cooldown between loads
+var cooldown: float = 0.0  # Delta timer
 
 func _process(delta):
   # Update the cooldown timer
@@ -29,5 +29,5 @@ func _process(delta):
     sprite.show()
 
     # Play the sound
-    $SFX.play()
+    Audio.play_sfx("loading_cone", 0.1)
     index += 1

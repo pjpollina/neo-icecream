@@ -1,0 +1,46 @@
+[gd_scene load_steps=11 format=3 uid="uid://cxgcmqhijldi1"]
+
+[ext_resource type="Script" path="res://globals/src/audio.gd" id="1_pjcly"]
+[ext_resource type="AudioStream" uid="uid://cpvepl1877d7c" path="res://assets/audio/music/classic.ogg" id="2_un1dy"]
+[ext_resource type="AudioStream" uid="uid://duplshekommsr" path="res://assets/audio/sfx/ui_popup_show.ogg" id="3_gmktu"]
+[ext_resource type="AudioStream" uid="uid://cw0b8c71iw1al" path="res://assets/audio/sfx/ui_popup_hide.ogg" id="4_xckpo"]
+[ext_resource type="AudioStream" uid="uid://wg2kccvvruj6" path="res://assets/audio/sfx/ui_hover.ogg" id="5_2atxy"]
+[ext_resource type="AudioStream" uid="uid://dro80bncnodbf" path="res://assets/audio/sfx/splatter.ogg" id="6_5d368"]
+[ext_resource type="AudioStream" uid="uid://bkomf56r1hrk0" path="res://assets/audio/sfx/loading_cone.ogg" id="7_kkxad"]
+[ext_resource type="AudioStream" uid="uid://bj7d0jr5lomnh" path="res://assets/audio/sfx/bonus_topping.ogg" id="8_sq4dn"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/bonus_pickup.ogg" id="9_efn43"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/bonus_clear.ogg" id="10_yhkau"]
+
+[node name="Audio" type="Node"]
+script = ExtResource("1_pjcly")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_un1dy")
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+
+[node name="UIPopupShow" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_gmktu")
+
+[node name="UIPopupHide" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_xckpo")
+
+[node name="UIHover" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_2atxy")
+
+[node name="Splatter" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_5d368")
+
+[node name="LoadingCone" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("7_kkxad")
+
+[node name="BonusTopping" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("8_sq4dn")
+
+[node name="BonusPickup" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("9_efn43")
+
+[node name="BonusClear" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("10_yhkau")
+
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]

@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://drfpw0pttiuut"]
+[gd_scene load_steps=5 format=3 uid="uid://drfpw0pttiuut"]
 
 [ext_resource type="Script" path="res://game_objects/player/player.gd" id="1_dykij"]
-[ext_resource type="AudioStream" uid="uid://dro80bncnodbf" path="res://assets/audio/sfx/splatter.ogg" id="2_ry8eg"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5w8oi"]
 size = Vector2(64, 64)
@@ -34,8 +33,5 @@ position = Vector2(32, 32)
 shape = SubResource("CapsuleShape2D_y3pws")
 debug_color = Color(0.992157, 0, 0.247059, 0.419608)
 metadata/_edit_lock_ = true
-
-[node name="SplatterSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_ry8eg")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

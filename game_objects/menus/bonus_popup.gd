@@ -5,7 +5,7 @@ func _process(_delta):
 
 func ping():
   $Timer.start(1.0)
-  $BellSFX.play()
+  Audio.play_sfx("bonus_topping")
 
 func _on_timer_timeout():
   $Timer.stop()

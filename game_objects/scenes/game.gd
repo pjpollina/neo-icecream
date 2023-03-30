@@ -19,6 +19,7 @@ func _ready():
 func _on_player_splattered():
   $Shooter.clear_shots()
   lives -= 1
+  Audio.play_sfx("splatter")
 
   $StatusMenu/Lives.text = "Lives: %d" % lives
 
@@ -33,15 +34,16 @@ func _on_scoop_outta_here(topping):
   score += 5
   if topping > Scoop.Topping.None:
     $BonusPopup.ping()
+    Audio.play_sfx("bonus_topping")
     score += 10
   $StatusMenu/Score.text = "Score: %d" % score
   $StatusMenu/Scoops.text = "Scoops: %d" % dodges
 
 func _on_load_sequence_donezo():
   $Popup.show()
-  $Popup/ShowSFX.play()
+  Audio.play_sfx("ui_popup_show")
 
 func _on_popup_dismissed():
   $Popup.hide()
-  $Popup/HideSFX.play()
+  Audio.play_sfx("ui_popup_hide")
   $Shooter.prepare()

@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://i50qdbt4xp2k"]
+[gd_scene load_steps=3 format=3 uid="uid://i50qdbt4xp2k"]
 
 [ext_resource type="Script" path="res://game_objects/menus/game_over.gd" id="1_nqakm"]
-[ext_resource type="AudioStream" uid="uid://wg2kccvvruj6" path="res://assets/audio/sfx/ui_hover.ogg" id="2_hsetg"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ahiwi"]
 
@@ -59,9 +58,6 @@ text = "Play Again"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Return to Title"
-
-[node name="ButtonHoverSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_hsetg")
 
 [connection signal="mouse_entered" from="Buttons/PlayAgain" to="." method="_on_mouse_entered_button"]
 [connection signal="pressed" from="Buttons/PlayAgain" to="." method="_on_play_again_pressed"]

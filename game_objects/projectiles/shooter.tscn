@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5mexxt3t5ok"]
+[gd_scene load_steps=5 format=3 uid="uid://c5mexxt3t5ok"]
 
 [ext_resource type="Script" path="res://game_objects/projectiles/shooter.gd" id="1_7ky70"]
 [ext_resource type="Script" path="res://game_objects/projectiles/load_sequence.gd" id="2_f28tr"]
-[ext_resource type="AudioStream" uid="uid://bkomf56r1hrk0" path="res://assets/audio/sfx/loading_cone.ogg" id="3_2ppvk"]
 [ext_resource type="Texture2D" uid="uid://d28twtgr684hw" path="res://assets/sprites/scoops.webp" id="4_8tl81"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4g51o"]
@@ -26,9 +25,6 @@ centered = false
 
 [node name="LoadSequence" type="Node" parent="."]
 script = ExtResource("2_f28tr")
-
-[node name="SFX" type="AudioStreamPlayer" parent="LoadSequence"]
-stream = ExtResource("3_2ppvk")
 
 [node name="Sprite" type="Sprite2D" parent="LoadSequence"]
 visible = false

@@ -18,5 +18,4 @@ func _process(_delta):
 # Called when player is hit
 func _on_area_entered(area):
   if area as Scoop:
-    $SplatterSFX.play()
     splattered.emit()

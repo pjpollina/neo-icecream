@@ -21,6 +21,10 @@ boot_splash/use_filter=false
 config/icon="res://assets/icons/icon.webp"
 config/windows_native_icon="res://assets/icons/icon.ico"
 
+[autoload]
+
+Audio="*res://globals/audio.tscn"
+
 [debug]
 
 file_logging/enable_file_logging=true

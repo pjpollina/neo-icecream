@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxaleauxdnykb"]
+[gd_scene load_steps=2 format=3 uid="uid://dxaleauxdnykb"]
 
 [ext_resource type="Script" path="res://game_objects/menus/bonus_popup.gd" id="1_plct6"]
-[ext_resource type="AudioStream" uid="uid://bj7d0jr5lomnh" path="res://assets/audio/sfx/bonus_topping.ogg" id="2_jknqi"]
 
 [node name="BonusPopup" type="Control"]
 layout_mode = 3
@@ -25,9 +24,6 @@ grow_vertical = 2
 text = "Topping Bonus!"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="BellSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_jknqi")
 
 [node name="Timer" type="Timer" parent="."]
 

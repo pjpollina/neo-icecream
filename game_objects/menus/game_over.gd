@@ -7,4 +7,4 @@ func _on_return_to_title_pressed():
   get_tree().change_scene_to_file("res://game_objects/menus/main_menu.tscn")
 
 func _on_mouse_entered_button():
-  $ButtonHoverSFX.play()
+  Audio.play_sfx("ui_hover")
