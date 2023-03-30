@@ -5,19 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bp4sp0d6br1fg" path="res://game_objects/menus/popup.tscn" id="4_1kqce"]
 [ext_resource type="PackedScene" uid="uid://c5mexxt3t5ok" path="res://game_objects/projectiles/shooter.tscn" id="4_rencn"]
 [ext_resource type="PackedScene" uid="uid://dxaleauxdnykb" path="res://game_objects/menus/bonus_popup.tscn" id="5_uba25"]
-
-[sub_resource type="GDScript" id="GDScript_0x85f"]
-resource_name = "update"
-script/source = "extends Label
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-  pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-  text = \"scoops: %d          lives: %d          score: %d\" % [get_parent().dodges, get_parent().lives, get_parent().score]
-"
+[ext_resource type="PackedScene" uid="uid://qmcyji1gdutc" path="res://game_objects/menus/status_menu.tscn" id="6_fu1bs"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_sqkp8")
@@ -28,13 +16,10 @@ script = ExtResource("1_sqkp8")
 
 [node name="BonusPopup" parent="." instance=ExtResource("5_uba25")]
 
-[node name="Temp" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-script = SubResource("GDScript_0x85f")
-
 [node name="Popup" parent="." instance=ExtResource("4_1kqce")]
 visible = false
+
+[node name="StatusMenu" parent="." instance=ExtResource("6_fu1bs")]
 
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
 [connection signal="splattered" from="Player" to="." method="_on_player_splattered"]

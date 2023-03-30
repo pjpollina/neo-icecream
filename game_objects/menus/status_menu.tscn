@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://qmcyji1gdutc"]
+
+[node name="StatusMenu" type="HBoxContainer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+offset_right = 388.0
+grow_vertical = 0
+metadata/_edit_group_ = true
+
+[node name="Lives" type="Label" parent="."]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Lives: 99"
+vertical_alignment = 1
+
+[node name="Scoops" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Scoops: 999/999"
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Score: 99,999"
+vertical_alignment = 1
