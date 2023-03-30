@@ -31,3 +31,6 @@ script = SubResource("GDScript_0x85f")
 
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
 [connection signal="splattered" from="Player" to="." method="_on_player_splattered"]
+[connection signal="donezo" from="Shooter/LoadSequence" to="." method="_on_load_sequence_donezo"]
+
+[editable path="Shooter"]

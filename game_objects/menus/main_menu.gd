@@ -8,3 +8,6 @@ func _on_instructions_pressed():
 
 func _on_toggle_music_pressed():
   pass
+
+func _on_mouse_entered_button():
+  $ButtonHoverSFX.play()

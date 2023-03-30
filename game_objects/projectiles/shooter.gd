@@ -4,12 +4,12 @@ extends Node2D
 const Scoop = preload("res://game_objects/projectiles/scoop.tscn")
 
 var firerate: float = 0.25  # Base time in seconds between shots
-var cooldown: float = 0.0   # Delta timer
+var cooldown: float = -999  # Delta timer
 var last_shot: int = -1     # Most recent firing position
 
 # Initialize the shooter
 func _ready():
-  prepare()
+  pass
 
 # Where the magic happens
 func _process(delta):

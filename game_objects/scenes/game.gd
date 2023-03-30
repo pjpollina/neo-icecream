@@ -25,3 +25,6 @@ func _on_player_splattered():
 func _on_scoop_outta_here():
   dodges += 1
   score += 5
+
+func _on_load_sequence_donezo():
+  $Shooter.prepare()
