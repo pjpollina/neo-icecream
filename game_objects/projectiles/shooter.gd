@@ -1,7 +1,7 @@
 ## Scoop shooter class
 extends Node2D
 
-const Scoop = preload("res://game_objects/projectiles/scoop.tscn")
+const scoop = preload("res://game_objects/projectiles/scoop.tscn")
 
 var firerate: float = 0.25  # Base time in seconds between shots
 var cooldown: float = -999  # Delta timer
@@ -31,14 +31,12 @@ func _process(delta):
       last_shot = pos
 
     # Create the shot instance
-    var shot = Scoop.instantiate()
+    var shot = scoop.instantiate()
+    shot.prepare(1.0, Scoop.Flavor.Strawberry)
 
     # Put the shot in the right spot
     shot.position = $Positions.get_point_position(pos)
     shot.translate(position)
-
-    # Slightly randomize the velocity
-    shot.velocity = randf_range(0.9, 1.1)
 
     # FIRE!!!
     $ShotHolder.add_child(shot)

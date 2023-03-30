@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://codingvrcbg31"]
+[gd_scene load_steps=7 format=3 uid="uid://codingvrcbg31"]
 
 [ext_resource type="PackedScene" uid="uid://drfpw0pttiuut" path="res://game_objects/player/player.tscn" id="1_ev5gp"]
 [ext_resource type="Script" path="res://game_objects/scenes/game.gd" id="1_sqkp8"]
 [ext_resource type="PackedScene" uid="uid://bp4sp0d6br1fg" path="res://game_objects/menus/popup.tscn" id="4_1kqce"]
 [ext_resource type="PackedScene" uid="uid://c5mexxt3t5ok" path="res://game_objects/projectiles/shooter.tscn" id="4_rencn"]
+[ext_resource type="PackedScene" uid="uid://dxaleauxdnykb" path="res://game_objects/menus/bonus_popup.tscn" id="5_uba25"]
 
 [sub_resource type="GDScript" id="GDScript_0x85f"]
 resource_name = "update"
@@ -24,6 +25,8 @@ script = ExtResource("1_sqkp8")
 [node name="Player" parent="." instance=ExtResource("1_ev5gp")]
 
 [node name="Shooter" parent="." instance=ExtResource("4_rencn")]
+
+[node name="BonusPopup" parent="." instance=ExtResource("5_uba25")]
 
 [node name="Temp" type="Label" parent="."]
 offset_right = 40.0

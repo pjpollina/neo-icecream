@@ -22,9 +22,12 @@ func _on_player_splattered():
     get_tree().change_scene_to_file("res://game_objects/menus/game_over.tscn")
 
 # Called after a projectile leaves the screen
-func _on_scoop_outta_here():
+func _on_scoop_outta_here(topping):
   dodges += 1
   score += 5
+  if topping > Scoop.Topping.None:
+    $BonusPopup.ping()
+    score += 10
 
 func _on_load_sequence_donezo():
   $Popup.show()
