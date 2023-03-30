@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbtd580lkshji"]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://game_objects/projectiles/scoop.gd" id="1_v802b"]
+[ext_resource type="Script" path="res://game_objects/scoop.gd" id="1_v802b"]
 [ext_resource type="Texture2D" uid="uid://d28twtgr684hw" path="res://assets/sprites/scoops.webp" id="2_5wkjs"]
 [ext_resource type="Texture2D" uid="uid://1y503w4atdon" path="res://assets/sprites/toppings.webp" id="3_exi5v"]
 

@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://i50qdbt4xp2k"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://game_objects/menus/game_over.gd" id="1_nqakm"]
+[ext_resource type="Script" path="res://game_objects/game_over.gd" id="1_nqakm"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ahiwi"]
 

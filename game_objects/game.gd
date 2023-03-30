@@ -26,7 +26,7 @@ func _on_player_splattered():
   # Trigger a game over when the player is out of lives
   if(lives < 1):
     $Shooter.set_process(false)
-    get_tree().change_scene_to_file("res://game_objects/menus/game_over.tscn")
+    get_tree().change_scene_to_file("res://game_objects/game_over.tscn")
 
 # Called after a projectile leaves the screen
 func _on_scoop_outta_here(topping):

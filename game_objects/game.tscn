@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://codingvrcbg31"]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" uid="uid://drfpw0pttiuut" path="res://game_objects/player/player.tscn" id="1_ev5gp"]
-[ext_resource type="Script" path="res://game_objects/scenes/game.gd" id="1_sqkp8"]
-[ext_resource type="PackedScene" uid="uid://bp4sp0d6br1fg" path="res://game_objects/menus/popup.tscn" id="4_1kqce"]
-[ext_resource type="PackedScene" uid="uid://c5mexxt3t5ok" path="res://game_objects/projectiles/shooter.tscn" id="4_rencn"]
-[ext_resource type="PackedScene" uid="uid://dxaleauxdnykb" path="res://game_objects/menus/bonus_popup.tscn" id="5_uba25"]
-[ext_resource type="PackedScene" uid="uid://qmcyji1gdutc" path="res://game_objects/menus/status_menu.tscn" id="6_fu1bs"]
+[ext_resource type="PackedScene" path="res://game_objects/player.tscn" id="1_ev5gp"]
+[ext_resource type="Script" path="res://game_objects/game.gd" id="1_sqkp8"]
+[ext_resource type="PackedScene" path="res://game_objects/popup.tscn" id="4_1kqce"]
+[ext_resource type="PackedScene" path="res://game_objects/shooter.tscn" id="4_rencn"]
+[ext_resource type="PackedScene" path="res://game_objects/bonus_popup.tscn" id="5_uba25"]
+[ext_resource type="PackedScene" uid="uid://qmcyji1gdutc" path="res://game_objects/status_menu.tscn" id="6_fu1bs"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_sqkp8")

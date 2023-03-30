@@ -1,7 +1,7 @@
 ## Scoop shooter class
 extends Node2D
 
-const scoop = preload("res://game_objects/projectiles/scoop.tscn")
+const scoop = preload("res://game_objects/scoop.tscn")
 
 var firerate: float = 0.25  # Base time in seconds between shots
 var cooldown: float = -999  # Delta timer

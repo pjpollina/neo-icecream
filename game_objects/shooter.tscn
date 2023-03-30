@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5mexxt3t5ok"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://game_objects/projectiles/shooter.gd" id="1_7ky70"]
-[ext_resource type="Script" path="res://game_objects/projectiles/load_sequence.gd" id="2_f28tr"]
+[ext_resource type="Script" path="res://game_objects/shooter.gd" id="1_7ky70"]
+[ext_resource type="Script" path="res://game_objects/load_sequence.gd" id="2_f28tr"]
 [ext_resource type="Texture2D" uid="uid://d28twtgr684hw" path="res://assets/sprites/scoops.webp" id="4_8tl81"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4g51o"]
