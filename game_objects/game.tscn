@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://1ejqjyno13gk"]
+[gd_scene load_steps=9 format=3 uid="uid://1ejqjyno13gk"]
 
 [ext_resource type="Script" path="res://game_objects/game.gd" id="1_sqkp8"]
 [ext_resource type="Texture2D" uid="uid://puu7tsir00m3" path="res://assets/background.webp" id="2_db4bk"]
-[ext_resource type="PackedScene" path="res://game_objects/shooter.tscn" id="4_rencn"]
+[ext_resource type="Texture2D" uid="uid://d28twtgr684hw" path="res://assets/sprites/scoops.webp" id="3_bj50m"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5w8oi"]
 size = Vector2(64, 64)
@@ -13,6 +13,9 @@ size = Vector2(52, 60)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3pws"]
 radius = 26.0
 height = 60.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4g51o"]
+size = Vector2(576, 64)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ubhh4"]
 
@@ -44,7 +47,31 @@ shape = SubResource("CapsuleShape2D_y3pws")
 debug_color = Color(0.992157, 0, 0.247059, 0.419608)
 metadata/_edit_lock_ = true
 
-[node name="Shooter" parent="." instance=ExtResource("4_rencn")]
+[node name="Shooter" type="Node2D" parent="."]
+position = Vector2(12, 600)
+
+[node name="Positions" type="Line2D" parent="Shooter"]
+points = PackedVector2Array(0, 0, 64, 0, 128, 0, 192, 0, 256, 0, 320, 0, 384, 0, 448, 0, 512, 0)
+width = 0.0
+
+[node name="ShotHolder" type="Node" parent="Shooter"]
+
+[node name="DebugVisual" type="Sprite2D" parent="Shooter"]
+self_modulate = Color(1, 0.717647, 0.443137, 0.498039)
+show_behind_parent = true
+texture = SubResource("PlaceholderTexture2D_4g51o")
+centered = false
+
+[node name="LoadSequence" type="Node" parent="Shooter"]
+
+[node name="Sprite" type="Sprite2D" parent="Shooter/LoadSequence"]
+visible = false
+texture = ExtResource("3_bj50m")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="Scoops" type="CanvasGroup" parent="Shooter"]
 
 [node name="StatusMenu" type="HBoxContainer" parent="."]
 anchors_preset = 2
@@ -129,9 +156,5 @@ grow_vertical = 2
 texture = SubResource("PlaceholderTexture2D_ubhh4")
 
 [connection signal="area_entered" from="Player" to="." method="_on_player_area_entered"]
-[connection signal="area_entered" from="Player" to="Player" method="_on_area_entered" flags=18]
-[connection signal="donezo" from="Shooter/LoadSequence" to="." method="_on_load_sequence_donezo"]
 [connection signal="timeout" from="BonusPopup/Timer" to="." method="_on_timer_timeout"]
 [connection signal="gui_input" from="LevelPopup" to="." method="_on_level_popup_gui_input"]
-
-[editable path="Shooter"]
