@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://1ejqjyno13gk"]
 
-[ext_resource type="Script" path="res://game_objects/game.gd" id="1_sqkp8"]
+[ext_resource type="Script" path="res://game/game.gd" id="1_sqkp8"]
 [ext_resource type="Texture2D" uid="uid://puu7tsir00m3" path="res://assets/background.webp" id="2_db4bk"]
 [ext_resource type="Texture2D" uid="uid://d28twtgr684hw" path="res://assets/sprites/scoops.webp" id="3_bj50m"]
 

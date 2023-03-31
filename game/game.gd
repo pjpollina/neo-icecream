@@ -37,7 +37,7 @@ func _on_player_area_entered(area):
     # Trigger a game over when the player is out of lives
     if(lives < 1):
       $Shooter.set_process(false)
-      get_tree().change_scene_to_file("res://game_objects/game_over.tscn")
+      get_tree().change_scene_to_file("res://menus/game_over.tscn")
 
 # Called after a projectile leaves the screen
 func _on_scoop_outta_here(topping):
@@ -59,7 +59,7 @@ func _on_level_popup_gui_input(event):
     Audio.play_sfx("ui_popup_hide")
     prepare()
 
-const scoop = preload("res://game_objects/scoop.tscn")
+const scoop = preload("res://game/objects/scoop.tscn")
 
 var firerate: float = 0.25  # Base time in seconds between shots
 var cooldown: float = -999  # Delta timer

@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Ice Cream Machine"
 config/description="A Godot 4.0 remake of the classic Neopets game, Ice Cream Machine."
-run/main_scene="res://game_objects/main_menu.tscn"
+run/main_scene="res://menus/title.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 run/max_fps=60
 boot_splash/show_image=false
@@ -23,12 +23,13 @@ config/windows_native_icon="res://assets/icons/icon.ico"
 
 [autoload]
 
-Audio="*res://globals/audio.tscn"
+Audio="*res://systems/audio.tscn"
 
 [debug]
 
 file_logging/enable_file_logging=true
 gdscript/warnings/shadowed_variable=0
+gdscript/warnings/shadowed_variable_base_class=0
 gdscript/warnings/integer_division=0
 
 [display]

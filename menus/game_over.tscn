@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5r37jnvaphfx"]
+
+[ext_resource type="Script" path="res://menus/game_over.gd" id="1_nqakm"]
+[ext_resource type="Texture2D" uid="uid://dty1h48iexmu1" path="res://assets/gui/screen.webp" id="2_4r40k"]
+[ext_resource type="Texture2D" uid="uid://i75yrb5s2rsi" path="res://assets/gui/button_normal.webp" id="3_5g6pg"]
+[ext_resource type="Texture2D" uid="uid://dy2qdremror8" path="res://assets/gui/button_hover.webp" id="4_1h45o"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nqakm")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4r40k")
+
+[node name="Text" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.5
+offset_top = -51.0
+offset_right = 206.5
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 72
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayAgain" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 500.0
+offset_right = 298.0
+offset_bottom = 580.0
+size_flags_horizontal = 0
+texture_normal = ExtResource("3_5g6pg")
+texture_hover = ExtResource("4_1h45o")
+
+[node name="Label" type="Label" parent="PlayAgain"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play Again"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReturnToTitle" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 302.0
+offset_top = 500.0
+offset_right = 542.0
+offset_bottom = 580.0
+size_flags_horizontal = 10
+texture_normal = ExtResource("3_5g6pg")
+texture_hover = ExtResource("4_1h45o")
+
+[node name="Label" type="Label" parent="ReturnToTitle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return to Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="PlayAgain" to="." method="_on_mouse_entered_button"]
+[connection signal="pressed" from="PlayAgain" to="." method="_on_play_again_pressed"]
+[connection signal="mouse_entered" from="ReturnToTitle" to="." method="_on_mouse_entered_button"]
+[connection signal="pressed" from="ReturnToTitle" to="." method="_on_return_to_title_pressed"]

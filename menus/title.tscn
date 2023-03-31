@@ -1,18 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcpxabh43r6eh"]
+[gd_scene load_steps=5 format=3 uid="uid://r1tdq0nyaxxa"]
 
-[ext_resource type="Script" path="res://game_objects/main_menu.gd" id="1_bqkwv"]
-[ext_resource type="Texture2D" uid="uid://cewucqk6c6k56" path="res://assets/gui/title_screen.webp" id="2_otg5g"]
-[ext_resource type="Texture2D" uid="uid://i75yrb5s2rsi" path="res://assets/gui/button_normal.webp" id="3_rmret"]
-[ext_resource type="Texture2D" uid="uid://dy2qdremror8" path="res://assets/gui/button_hover.webp" id="4_fceou"]
+[ext_resource type="Script" path="res://menus/title.gd" id="1_ll16e"]
+[ext_resource type="Texture2D" uid="uid://cewucqk6c6k56" path="res://assets/gui/title_screen.webp" id="2_iyxoy"]
+[ext_resource type="Texture2D" uid="uid://i75yrb5s2rsi" path="res://assets/gui/button_normal.webp" id="3_j8tfv"]
+[ext_resource type="Texture2D" uid="uid://dy2qdremror8" path="res://assets/gui/button_hover.webp" id="4_3ne8e"]
 
-[node name="MainMenu" type="Control"]
+[node name="Title" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_bqkwv")
+script = ExtResource("1_ll16e")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -21,7 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_otg5g")
+texture = ExtResource("2_iyxoy")
 
 [node name="Instructions" type="TextureButton" parent="."]
 layout_mode = 2
@@ -30,8 +30,8 @@ offset_top = 584.0
 offset_right = 298.0
 offset_bottom = 664.0
 size_flags_horizontal = 0
-texture_normal = ExtResource("3_rmret")
-texture_hover = ExtResource("4_fceou")
+texture_normal = ExtResource("3_j8tfv")
+texture_hover = ExtResource("4_3ne8e")
 
 [node name="Label" type="Label" parent="Instructions"]
 layout_mode = 1
@@ -57,8 +57,8 @@ offset_top = 584.0
 offset_right = 542.0
 offset_bottom = 664.0
 size_flags_horizontal = 10
-texture_normal = ExtResource("3_rmret")
-texture_hover = ExtResource("4_fceou")
+texture_normal = ExtResource("3_j8tfv")
+texture_hover = ExtResource("4_3ne8e")
 
 [node name="Label" type="Label" parent="StartGame"]
 layout_mode = 1
@@ -84,8 +84,8 @@ offset_top = 668.0
 offset_right = 420.0
 offset_bottom = 748.0
 size_flags_horizontal = 4
-texture_normal = ExtResource("3_rmret")
-texture_hover = ExtResource("4_fceou")
+texture_normal = ExtResource("3_j8tfv")
+texture_hover = ExtResource("4_3ne8e")
 
 [node name="Label" type="Label" parent="ToggleMusic"]
 layout_mode = 1
