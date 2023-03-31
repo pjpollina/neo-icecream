@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_sqkp8"]
 [ext_resource type="Texture2D" uid="uid://puu7tsir00m3" path="res://assets/background.webp" id="2_db4bk"]
-[ext_resource type="Texture2D" uid="uid://d28twtgr684hw" path="res://assets/sprites/scoops.webp" id="3_bj50m"]
+[ext_resource type="Texture2D" uid="uid://d28twtgr684hw" path="res://assets/sprites/scoops.webp" id="3_civih"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5w8oi"]
 size = Vector2(64, 64)
@@ -54,24 +54,34 @@ position = Vector2(12, 600)
 points = PackedVector2Array(0, 0, 64, 0, 128, 0, 192, 0, 256, 0, 320, 0, 384, 0, 448, 0, 512, 0)
 width = 0.0
 
-[node name="ShotHolder" type="Node" parent="Shooter"]
+[node name="Scoops" type="CanvasGroup" parent="Shooter"]
+
+[node name="Base" type="Sprite2D" parent="Shooter/Scoops"]
+visible = false
+texture = ExtResource("3_civih")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="LoadDelay" type="Timer" parent="Shooter"]
+wait_time = 0.1
+autostart = true
+
+[node name="ShotCooldown" type="Timer" parent="Shooter"]
+wait_time = 0.25
+autostart = true
+
+[node name="ClearCooldown" type="Timer" parent="Shooter"]
+wait_time = 1.5
 
 [node name="DebugVisual" type="Sprite2D" parent="Shooter"]
+visible = false
 self_modulate = Color(1, 0.717647, 0.443137, 0.498039)
 show_behind_parent = true
 texture = SubResource("PlaceholderTexture2D_4g51o")
 centered = false
 
-[node name="LoadSequence" type="Node" parent="Shooter"]
-
-[node name="Sprite" type="Sprite2D" parent="Shooter/LoadSequence"]
-visible = false
-texture = ExtResource("3_bj50m")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 64, 64)
-
-[node name="Scoops" type="CanvasGroup" parent="Shooter"]
+[node name="Scoops" type="Node" parent="."]
 
 [node name="StatusMenu" type="HBoxContainer" parent="."]
 anchors_preset = 2
@@ -156,5 +166,8 @@ grow_vertical = 2
 texture = SubResource("PlaceholderTexture2D_ubhh4")
 
 [connection signal="area_entered" from="Player" to="." method="_on_player_area_entered"]
+[connection signal="timeout" from="Shooter/LoadDelay" to="." method="_on_load_delay_timeout"]
+[connection signal="timeout" from="Shooter/ShotCooldown" to="." method="_on_shot_cooldown_timeout"]
+[connection signal="timeout" from="Shooter/ClearCooldown" to="." method="_on_clear_cooldown_timeout"]
 [connection signal="timeout" from="BonusPopup/Timer" to="." method="_on_timer_timeout"]
 [connection signal="gui_input" from="LevelPopup" to="." method="_on_level_popup_gui_input"]
