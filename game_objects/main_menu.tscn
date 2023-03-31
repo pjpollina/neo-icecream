@@ -1,10 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcpxabh43r6eh"]
+[gd_scene load_steps=5 format=3 uid="uid://dcpxabh43r6eh"]
 
 [ext_resource type="Script" path="res://game_objects/main_menu.gd" id="1_bqkwv"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ahiwi"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2ix04"]
+[ext_resource type="Texture2D" uid="uid://cewucqk6c6k56" path="res://assets/gui/title_screen.webp" id="2_otg5g"]
+[ext_resource type="Texture2D" uid="uid://i75yrb5s2rsi" path="res://assets/gui/button_normal.webp" id="3_rmret"]
+[ext_resource type="Texture2D" uid="uid://dy2qdremror8" path="res://assets/gui/button_hover.webp" id="4_fceou"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -16,64 +15,98 @@ grow_vertical = 2
 script = ExtResource("1_bqkwv")
 
 [node name="Background" type="TextureRect" parent="."]
-self_modulate = Color(0.556863, 0.396078, 1, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("PlaceholderTexture2D_ahiwi")
+texture = ExtResource("2_otg5g")
 
-[node name="Title" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -200.0
-offset_top = 100.0
-offset_right = 200.0
-offset_bottom = 280.0
-grow_horizontal = 2
-texture = SubResource("PlaceholderTexture2D_2ix04")
+[node name="Instructions" type="TextureButton" parent="."]
+layout_mode = 2
+offset_left = 58.0
+offset_top = 584.0
+offset_right = 298.0
+offset_bottom = 664.0
+size_flags_horizontal = 0
+texture_normal = ExtResource("3_rmret")
+texture_hover = ExtResource("4_fceou")
 
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="Label" type="Label" parent="Instructions"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_right = 200.0
-offset_bottom = 200.0
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
+text = "Instructions"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="TopRow" type="HBoxContainer" parent="Buttons"]
+[node name="StartGame" type="TextureButton" parent="."]
 layout_mode = 2
-alignment = 1
+offset_left = 302.0
+offset_top = 584.0
+offset_right = 542.0
+offset_bottom = 664.0
+size_flags_horizontal = 10
+texture_normal = ExtResource("3_rmret")
+texture_hover = ExtResource("4_fceou")
 
-[node name="Instructions" type="Button" parent="Buttons/TopRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "View Instructions"
-
-[node name="StartGame" type="Button" parent="Buttons/TopRow"]
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="Label" type="Label" parent="StartGame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Start Game"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ToggleMusic" type="Button" parent="Buttons"]
-custom_minimum_size = Vector2(198, 0)
+[node name="ToggleMusic" type="TextureButton" parent="."]
 layout_mode = 2
+offset_left = 180.0
+offset_top = 668.0
+offset_right = 420.0
+offset_bottom = 748.0
 size_flags_horizontal = 4
-text = "Turn Music Off"
+texture_normal = ExtResource("3_rmret")
+texture_hover = ExtResource("4_fceou")
 
-[connection signal="mouse_entered" from="Buttons/TopRow/Instructions" to="." method="_on_mouse_entered_button"]
-[connection signal="pressed" from="Buttons/TopRow/Instructions" to="." method="_on_instructions_pressed"]
-[connection signal="mouse_entered" from="Buttons/TopRow/StartGame" to="." method="_on_mouse_entered_button"]
-[connection signal="pressed" from="Buttons/TopRow/StartGame" to="." method="_on_start_game_pressed"]
-[connection signal="mouse_entered" from="Buttons/ToggleMusic" to="." method="_on_mouse_entered_button"]
-[connection signal="pressed" from="Buttons/ToggleMusic" to="." method="_on_toggle_music_pressed"]
+[node name="Label" type="Label" parent="ToggleMusic"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Turn Music Off"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="Instructions" to="." method="_on_mouse_entered_button"]
+[connection signal="pressed" from="Instructions" to="." method="_on_instructions_pressed"]
+[connection signal="mouse_entered" from="StartGame" to="." method="_on_mouse_entered_button"]
+[connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="mouse_entered" from="ToggleMusic" to="." method="_on_mouse_entered_button"]
+[connection signal="pressed" from="ToggleMusic" to="." method="_on_toggle_music_pressed"]

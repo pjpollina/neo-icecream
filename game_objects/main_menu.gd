@@ -14,4 +14,4 @@ func _on_mouse_entered_button():
   Audio.play_sfx("ui_hover")
 
 func update_music_button_text() -> void:
-  $Buttons/ToggleMusic.text = "Turn Music %s" % ("Off" if Audio.music_enabled else "On")
+  $ToggleMusic/Label.text = "Turn Music %s" % ("Off" if Audio.music_enabled else "On")

@@ -41,6 +41,10 @@ window/size/resizable=false
 
 movie_writer/movie_file="C:/Users/PJ/Videos/Godot/icm.avi"
 
+[gui]
+
+theme/custom_font="res://assets/fonts/BarelyEnoughRegular.ttf"
+
 [input_devices]
 
 pen_tablet/driver.windows="winink"
