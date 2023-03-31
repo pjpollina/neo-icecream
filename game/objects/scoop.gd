@@ -37,7 +37,21 @@ func set_topping_sprite():
   $Topping.region_rect.position.x = (64 * topping as int)
 
 enum Flavor {
-  Strawberry, Vanilla, Chocolate, Swirl, Neapolitan, RaspRipple, Butterscotch, FudgeRipple,
+  Strawberry,
+  Vanilla,
+  Chocolate,
+
+  RaspRipple,
+  Butterscotch,
+  FudgeRipple,
+
+  Swirl,
+  Neapolitan,
+  Hydrox,
+
+  MintChip,
+  RockyRoad,
+  Ube,
 }
 
 # TODO: Name toppings once they have finalized assets
