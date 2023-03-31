@@ -15,6 +15,9 @@ func _ready():
   $StatusMenu/Score.text = "Score: %d" % score
   $StatusMenu/Scoops.text = "Scoops: %d" % dodges
 
+func _process(_delta):
+  $BonusPopup/Text.modulate.a = $BonusPopup/Timer.time_left
+
 # Called when the player is hit by a bad projectile
 func _on_player_splattered():
   $Shooter.clear_shots()
@@ -33,17 +36,21 @@ func _on_scoop_outta_here(topping):
   dodges += 1
   score += 5
   if topping > Scoop.Topping.None:
-    $BonusPopup.ping()
+    $BonusPopup/Timer.start(1.0)
     Audio.play_sfx("bonus_topping")
     score += 10
   $StatusMenu/Score.text = "Score: %d" % score
   $StatusMenu/Scoops.text = "Scoops: %d" % dodges
 
 func _on_load_sequence_donezo():
-  $Popup.show()
+  $LevelPopup.show()
   Audio.play_sfx("ui_popup_show")
 
-func _on_popup_dismissed():
-  $Popup.hide()
-  Audio.play_sfx("ui_popup_hide")
-  $Shooter.prepare()
+func _on_timer_timeout():
+  $BonusPopup/Timer.stop()
+
+func _on_level_popup_gui_input(event):
+  if event as InputEventMouseButton:
+    $LevelPopup.hide()
+    Audio.play_sfx("ui_popup_hide")
+    $Shooter.prepare()

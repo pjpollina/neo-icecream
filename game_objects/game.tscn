@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://1ejqjyno13gk"]
 
 [ext_resource type="PackedScene" path="res://game_objects/player.tscn" id="1_ev5gp"]
 [ext_resource type="Script" path="res://game_objects/game.gd" id="1_sqkp8"]
-[ext_resource type="PackedScene" path="res://game_objects/popup.tscn" id="4_1kqce"]
 [ext_resource type="PackedScene" path="res://game_objects/shooter.tscn" id="4_rencn"]
-[ext_resource type="PackedScene" path="res://game_objects/bonus_popup.tscn" id="5_uba25"]
-[ext_resource type="PackedScene" uid="uid://qmcyji1gdutc" path="res://game_objects/status_menu.tscn" id="6_fu1bs"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ubhh4"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_sqkp8")
@@ -14,16 +13,92 @@ script = ExtResource("1_sqkp8")
 
 [node name="Shooter" parent="." instance=ExtResource("4_rencn")]
 
-[node name="BonusPopup" parent="." instance=ExtResource("5_uba25")]
+[node name="StatusMenu" type="HBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+offset_right = 388.0
+grow_vertical = 0
+metadata/_edit_group_ = true
 
-[node name="Popup" parent="." instance=ExtResource("4_1kqce")]
+[node name="Lives" type="Label" parent="StatusMenu"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Lives: 99"
+vertical_alignment = 1
+
+[node name="Scoops" type="Label" parent="StatusMenu"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Scoops: 999/999"
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="StatusMenu"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Score: 99,999"
+vertical_alignment = 1
+
+[node name="BonusPopup" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="Text" type="Label" parent="BonusPopup"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Topping Bonus!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="BonusPopup"]
+
+[node name="LevelPopup" type="Control" parent="."]
 visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
 
-[node name="StatusMenu" parent="." instance=ExtResource("6_fu1bs")]
+[node name="Overlay" type="Panel" parent="LevelPopup"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_right = 300.0
+offset_bottom = 800.0
+grow_horizontal = 2
+
+[node name="Foreground" type="TextureRect" parent="LevelPopup"]
+self_modulate = Color(1, 1, 1, 0.0588235)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_ubhh4")
 
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
 [connection signal="splattered" from="Player" to="." method="_on_player_splattered"]
 [connection signal="donezo" from="Shooter/LoadSequence" to="." method="_on_load_sequence_donezo"]
-[connection signal="dismissed" from="Popup" to="." method="_on_popup_dismissed"]
+[connection signal="timeout" from="BonusPopup/Timer" to="." method="_on_timer_timeout"]
+[connection signal="gui_input" from="LevelPopup" to="." method="_on_level_popup_gui_input"]
 
 [editable path="Shooter"]
