@@ -133,7 +133,7 @@ text = "Topping Bonus!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Timer" type="Timer" parent="BonusPopup"]
+[node name="FadeTimer" type="Timer" parent="BonusPopup"]
 
 [node name="LevelPopup" type="Control" parent="."]
 visible = false
@@ -169,5 +169,5 @@ texture = SubResource("PlaceholderTexture2D_ubhh4")
 [connection signal="timeout" from="Shooter/LoadDelay" to="." method="_on_load_delay_timeout"]
 [connection signal="timeout" from="Shooter/ShotCooldown" to="." method="_on_shot_cooldown_timeout"]
 [connection signal="timeout" from="Shooter/ClearCooldown" to="." method="_on_clear_cooldown_timeout"]
-[connection signal="timeout" from="BonusPopup/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="BonusPopup/FadeTimer" to="." method="_on_bonus_fade_timer_timeout"]
 [connection signal="gui_input" from="LevelPopup" to="." method="_on_level_popup_gui_input"]

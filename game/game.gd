@@ -11,9 +11,9 @@ var dodges: int  # Scoops successfully dodged
 ##
 ## SHOOTER STATE #####################################
 ##
-var loading:  int = 0       # State of loader (9 = Done)
-var shooting: bool = false  # Is shooter shooting?
-var last_shot: int = -1     # Most recent firing position
+var loading:   int   # State of loader (8 = Done)
+var last_shot: int   # Most recent firing position
+var shooting:  bool  # Is shooter shooting?
 
 # Initialize the state of the game
 func _ready():
@@ -21,12 +21,40 @@ func _ready():
   score = 0
   dodges = 0
 
+  shooting = false
+  loading = 0
+  last_shot = -1
+
+  update_status_menu()
+
 func _process(_delta):
+  move_player()
+  update_bonus_fade()
+
+# Called after a projectile leaves the screen
+func _on_scoop_outta_here(topping):
+  dodges += 1
+  score += 5
+  if topping > Scoop.Topping.None:
+    show_bonus_popup()
+    score += 10
+  update_status_menu()
+
+# Remove all shot instances from the holder
+func clear_shots() -> void:
+  for child in $Scoops.get_children():
+    child.queue_free()
+  shooting = false
+  $Shooter/ClearCooldown.start()
+
+## PLAYER ############################################
+##
+
+func move_player():
   $Player.position = $Player.get_global_mouse_position()
   $Player.translate(Vector2(-32, -32))
   $Player.position.x = clamp($Player.position.x, 0, 600-64)
   $Player.position.y = clamp($Player.position.y, 0, 600-64)
-  $BonusPopup/Text.modulate.a = $BonusPopup/Timer.time_left
 
 # Called when player is hit
 func _on_player_area_entered(area):
@@ -36,27 +64,6 @@ func _on_player_area_entered(area):
     Audio.play_sfx("splatter")
     update_status_menu()
 
-# Called after a projectile leaves the screen
-func _on_scoop_outta_here(topping):
-  dodges += 1
-  score += 5
-  if topping > Scoop.Topping.None:
-    $BonusPopup/Timer.start(1.0)
-    Audio.play_sfx("bonus_topping")
-    score += 10
-  $StatusMenu/Score.text = "Score: %d" % score
-  $StatusMenu/Scoops.text = "Scoops: %d" % dodges
-
-func _on_timer_timeout():
-  $BonusPopup/Timer.stop()
-
-# Remove all shot instances from the holder
-func clear_shots() -> void:
-  for child in $Scoops.get_children():
-    child.queue_free()
-  shooting = false
-  $Shooter/ClearCooldown.start()
-
 ## SHOOTER ###########################################
 ##
 
@@ -64,7 +71,7 @@ func _on_shot_cooldown_timeout():
   if !shooting: return
 
   # Slightly randomize cooldown for next shot
-  $Shooter/ShotCooldown.wait_time = 0.25 + randf_range(-0.5, 0.5)
+  $Shooter/ShotCooldown.wait_time = 0.25 + randf_range(-0.1, 0.5)
 
   # Randomly choose which position to fire from
   var pos = randi_range(0, 8)
@@ -126,6 +133,19 @@ func update_status_menu():
   $StatusMenu/Lives.text = "Lives: %d" % lives
   $StatusMenu/Score.text = "Score: %d" % score
   $StatusMenu/Scoops.text = "Scoops: %d" % dodges
+
+## BONUS POPUP #######################################
+##
+
+func show_bonus_popup():
+  $BonusPopup/FadeTimer.start(1.0)
+  Audio.play_sfx("bonus_topping")
+
+func update_bonus_fade():
+  $BonusPopup/Text.modulate.a = $BonusPopup/FadeTimer.time_left
+
+func _on_bonus_fade_timer_timeout():
+  $BonusPopup/FadeTimer.stop()
 
 ## LEVEL POPUP #######################################
 ##
