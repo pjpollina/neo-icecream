@@ -8,6 +8,9 @@ const scoop = preload("res://game/objects/scoop.tscn")
 var lives:  int  # The player's life count
 var score:  int  # Current score
 var dodges: int  # Scoops successfully dodged
+
+var level: int
+var level_data: Level
 ##
 ## SHOOTER STATE #####################################
 ##
@@ -25,11 +28,21 @@ func _ready():
   loading = 0
   last_shot = -1
 
+  level = 1
+  load_level()
+
   update_status_menu()
 
 func _process(_delta):
   move_player()
   update_bonus_fade()
+
+  if level_data.count < dodges && $Scoops.get_child_count() < 1:
+    shooting = false
+    level += 1
+    dodges = 0
+    load_level()
+    start_level()
 
 # Called after a projectile leaves the screen
 func _on_scoop_outta_here(topping):
@@ -64,11 +77,25 @@ func _on_player_area_entered(area):
     Audio.play_sfx("splatter")
     update_status_menu()
 
+## LEVEL #############################################
+##
+
+func load_level():
+  level_data = $LevelData.get_resource("level_%02d" % level)
+  $LevelPopup/Foreground.texture = load("res://assets/splashes/level_%02d.webp" % level)
+
+func start_level():
+  update_status_menu()
+  for scoop in $Shooter/Scoops.get_children():
+    scoop.region_rect.position.x = (64 * level_data.flavor as int)
+  show_level_popup()
+
 ## SHOOTER ###########################################
 ##
 
 func _on_shot_cooldown_timeout():
   if !shooting: return
+  if level_data.count < ($Scoops.get_child_count() + dodges): return
 
   # Slightly randomize cooldown for next shot
   $Shooter/ShotCooldown.wait_time = 0.25 + randf_range(-0.1, 0.5)
@@ -85,7 +112,7 @@ func _on_shot_cooldown_timeout():
 
   # Create the shot instance
   var shot = scoop.instantiate()
-  shot.prepare(1.0, Scoop.Flavor.Strawberry)
+  shot.prepare(level_data.speed, level_data.flavor)
 
   # Put the shot in the right spot
   shot.position = $Shooter/Positions.get_point_position(pos)
@@ -132,7 +159,7 @@ func _on_load_delay_timeout():
 func update_status_menu():
   $StatusMenu/Lives.text = "Lives: %d" % lives
   $StatusMenu/Score.text = "Score: %d" % score
-  $StatusMenu/Scoops.text = "Scoops: %d" % dodges
+  $StatusMenu/Scoops.text = "Scoops: %d/%d" % [dodges, level_data.count]
 
 ## BONUS POPUP #######################################
 ##
