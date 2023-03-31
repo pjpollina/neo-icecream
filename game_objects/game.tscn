@@ -1,13 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://1ejqjyno13gk"]
+[gd_scene load_steps=6 format=3 uid="uid://1ejqjyno13gk"]
 
 [ext_resource type="PackedScene" path="res://game_objects/player.tscn" id="1_ev5gp"]
 [ext_resource type="Script" path="res://game_objects/game.gd" id="1_sqkp8"]
+[ext_resource type="Texture2D" uid="uid://puu7tsir00m3" path="res://assets/background.webp" id="2_db4bk"]
 [ext_resource type="PackedScene" path="res://game_objects/shooter.tscn" id="4_rencn"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ubhh4"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_sqkp8")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_db4bk")
+centered = false
 
 [node name="Player" parent="." instance=ExtResource("1_ev5gp")]
 
