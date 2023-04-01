@@ -18,8 +18,8 @@ run/max_fps=60
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://assets/icons/icon.webp"
-config/windows_native_icon="res://assets/icons/icon.ico"
+config/icon="res://assets/icon.webp"
+config/windows_native_icon="res://assets/icon.ico"
 
 [autoload]
 
@@ -44,7 +44,7 @@ movie_writer/movie_file="C:/Users/PJ/Videos/Godot/icm.avi"
 
 [gui]
 
-theme/custom_font="res://assets/fonts/BarelyEnoughRegular.ttf"
+theme/custom_font="res://assets/gui/BarelyEnoughRegular.ttf"
 
 [input_devices]
 

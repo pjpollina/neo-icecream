@@ -1,15 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxgcmqhijldi1"]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://systems/audio.gd" id="1_pjcly"]
-[ext_resource type="AudioStream" uid="uid://cpvepl1877d7c" path="res://assets/audio/music/classic.ogg" id="2_un1dy"]
+[ext_resource type="AudioStream" uid="uid://cpvepl1877d7c" path="res://assets/audio/classic.ogg" id="2_un1dy"]
 [ext_resource type="AudioStream" uid="uid://duplshekommsr" path="res://assets/audio/sfx/ui_popup_show.ogg" id="3_gmktu"]
 [ext_resource type="AudioStream" uid="uid://cw0b8c71iw1al" path="res://assets/audio/sfx/ui_popup_hide.ogg" id="4_xckpo"]
 [ext_resource type="AudioStream" uid="uid://wg2kccvvruj6" path="res://assets/audio/sfx/ui_hover.ogg" id="5_2atxy"]
 [ext_resource type="AudioStream" uid="uid://dro80bncnodbf" path="res://assets/audio/sfx/splatter.ogg" id="6_5d368"]
 [ext_resource type="AudioStream" uid="uid://bkomf56r1hrk0" path="res://assets/audio/sfx/loading_cone.ogg" id="7_kkxad"]
 [ext_resource type="AudioStream" uid="uid://bj7d0jr5lomnh" path="res://assets/audio/sfx/bonus_topping.ogg" id="8_sq4dn"]
-[ext_resource type="AudioStream" path="res://assets/audio/sfx/bonus_pickup.ogg" id="9_efn43"]
-[ext_resource type="AudioStream" path="res://assets/audio/sfx/bonus_clear.ogg" id="10_yhkau"]
+[ext_resource type="AudioStream" uid="uid://byhvy71cb6a85" path="res://assets/audio/sfx/bonus_pickup.ogg" id="9_efn43"]
+[ext_resource type="AudioStream" uid="uid://di07o2ndbtogu" path="res://assets/audio/sfx/bonus_clear.ogg" id="10_yhkau"]
 
 [node name="Audio" type="Node"]
 script = ExtResource("1_pjcly")
