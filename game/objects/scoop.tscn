@@ -17,6 +17,7 @@ script = ExtResource("1_v802b")
 metadata/_edit_group_ = true
 
 [node name="Fullsize" type="Sprite2D" parent="."]
+visible = false
 self_modulate = Color(1, 0.447059, 1, 0.34902)
 texture = SubResource("PlaceholderTexture2D_w3q2b")
 centered = false

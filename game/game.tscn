@@ -1,9 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://1ejqjyno13gk"]
+[gd_scene load_steps=26 format=3 uid="uid://1ejqjyno13gk"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_sqkp8"]
 [ext_resource type="Texture2D" uid="uid://puu7tsir00m3" path="res://assets/background.webp" id="2_db4bk"]
 [ext_resource type="Texture2D" uid="uid://d28twtgr684hw" path="res://assets/sprites/scoops.webp" id="3_civih"]
+[ext_resource type="Texture2D" uid="uid://cuqgobre5myrq" path="res://assets/sprites/adee.webp" id="3_mxfaw"]
 [ext_resource type="Resource" uid="uid://cabj5v3hn2a3q" path="res://game/levels/level_01.tres" id="4_xa5ea"]
+[ext_resource type="Texture2D" uid="uid://cyfes76h3ywb4" path="res://assets/splashes/level_01.webp" id="5_b2pgf"]
 [ext_resource type="Resource" uid="uid://bcqjh7eptehg6" path="res://game/levels/level_02.tres" id="5_s84nr"]
 [ext_resource type="Resource" uid="uid://bdjleppchpw3w" path="res://game/levels/level_03.tres" id="6_o88iw"]
 [ext_resource type="Resource" uid="uid://bs2dteb5aceen" path="res://game/levels/level_04.tres" id="7_v84aw"]
@@ -19,8 +21,42 @@
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5w8oi"]
 size = Vector2(64, 64)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_shksd"]
-size = Vector2(52, 60)
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7buj"]
+atlas = ExtResource("3_mxfaw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtjis"]
+atlas = ExtResource("3_mxfaw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i37xn"]
+atlas = ExtResource("3_mxfaw")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2o56"]
+atlas = ExtResource("3_mxfaw")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_clnua"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_l7buj")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_jtjis")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_i37xn")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_w2o56")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3pws"]
 radius = 26.0
@@ -28,8 +64,6 @@ height = 60.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4g51o"]
 size = Vector2(576, 64)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ubhh4"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_sqkp8")
@@ -42,16 +76,23 @@ centered = false
 metadata/_edit_group_ = true
 
 [node name="Fullsize" type="Sprite2D" parent="Player"]
+visible = false
 self_modulate = Color(0, 1, 0.45098, 0.34902)
 texture = SubResource("PlaceholderTexture2D_5w8oi")
 centered = false
 metadata/_edit_lock_ = true
 
-[node name="Placeholder" type="Sprite2D" parent="Player"]
-modulate = Color(0, 1, 0.45098, 1)
-texture = SubResource("PlaceholderTexture2D_shksd")
-offset = Vector2(32, 32)
-metadata/_edit_lock_ = true
+[node name="Idle" type="AnimatedSprite2D" parent="Player"]
+sprite_frames = SubResource("SpriteFrames_clnua")
+frame_progress = 0.34648
+centered = false
+
+[node name="Splatter" type="Sprite2D" parent="Player"]
+visible = false
+texture = ExtResource("3_mxfaw")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 64)
 
 [node name="Hitbox" type="CollisionShape2D" parent="Player"]
 position = Vector2(32, 32)
@@ -169,12 +210,88 @@ grow_horizontal = 2
 
 [node name="Foreground" type="TextureRect" parent="LevelPopup"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -240.0
+offset_right = 300.0
+offset_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("PlaceholderTexture2D_ubhh4")
+texture = ExtResource("5_b2pgf")
+
+[node name="Contents" type="Control" parent="LevelPopup"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+metadata/_edit_group_ = true
+
+[node name="Level" type="Label" parent="LevelPopup/Contents"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -74.5
+offset_right = 74.5
+offset_bottom = 53.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0.4)
+theme_override_font_sizes/font_size = 48
+text = "LEVEL 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quota" type="Label" parent="LevelPopup/Contents"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.5
+offset_right = 20.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0.4)
+theme_override_font_sizes/font_size = 32
+text = "Dodge 999 Scoops
+to proceed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CTC" type="Label" parent="LevelPopup/Contents"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -159.5
+offset_top = -80.0
+offset_right = 159.5
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 0.4)
+theme_override_font_sizes/font_size = 18
+text = "Click anywhere to continue..."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="LevelData" type="ResourcePreloader" parent="."]
 resources = [PackedStringArray("level_01", "level_02", "level_03", "level_04", "level_05", "level_06", "level_07", "level_08", "level_09", "level_10", "level_11", "level_12"), [ExtResource("4_xa5ea"), ExtResource("5_s84nr"), ExtResource("6_o88iw"), ExtResource("7_v84aw"), ExtResource("8_6kpt3"), ExtResource("9_hlc87"), ExtResource("10_g2mgp"), ExtResource("11_hy3vk"), ExtResource("12_4s5pm"), ExtResource("13_nfbm7"), ExtResource("14_2renc"), ExtResource("15_rjjm2")]]

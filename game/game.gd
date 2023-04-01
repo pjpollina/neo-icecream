@@ -31,6 +31,8 @@ func _ready():
   level = 1
   load_level()
 
+  $Player/Idle.play()
+
   update_status_menu()
 
 func _process(_delta):
@@ -69,9 +71,19 @@ func move_player():
   $Player.position.x = clamp($Player.position.x, 0, 600-64)
   $Player.position.y = clamp($Player.position.y, 0, 600-64)
 
+func splat_player() -> void:
+  $Player/Splatter.region_rect.position.x = (level_data.flavor * 64)
+  $Player/Splatter.show()
+  $Player/Idle.hide()
+
+func unsplat_player() -> void:
+  $Player/Splatter.hide()
+  $Player/Idle.show()
+
 # Called when player is hit
 func _on_player_area_entered(area):
   if area as Scoop:
+    splat_player()
     clear_shots()
     lives -= 1
     Audio.play_sfx("splatter")
@@ -83,6 +95,8 @@ func _on_player_area_entered(area):
 func load_level():
   level_data = $LevelData.get_resource("level_%02d" % level)
   $LevelPopup/Foreground.texture = load("res://assets/splashes/level_%02d.webp" % level)
+  $LevelPopup/Contents/Level.text = "Level %d" % level
+  $LevelPopup/Contents/Quota.text = "Dodge %d Scoops\nto proceed" % level_data.count
 
 func start_level():
   update_status_menu()
@@ -126,6 +140,9 @@ func _on_clear_cooldown_timeout():
   if(lives < 1):
     Audio.play_sfx("ui_popup_show")
     get_tree().change_scene_to_file("res://menus/game_over.tscn")
+
+  # Unsplatter the player
+  unsplat_player()
 
   # Otherwise, resume
   shooting = true
