@@ -1,42 +1,18 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://bnkcdi6lkhfxu"]
 
-[ext_resource type="Script" path="res://game/objects/scoop.gd" id="1_v802b"]
-[ext_resource type="Texture2D" uid="uid://d28twtgr684hw" path="res://assets/art/scoops.webp" id="2_5wkjs"]
-[ext_resource type="Texture2D" uid="uid://1y503w4atdon" path="res://assets/art/toppings.webp" id="3_exi5v"]
+[ext_resource type="Texture2D" uid="uid://d28twtgr684hw" path="res://assets/art/scoops.webp" id="1_yegwg"]
+[ext_resource type="Script" path="res://game/objects/scoop.gd" id="2_xp8n7"]
+[ext_resource type="Texture2D" uid="uid://1y503w4atdon" path="res://assets/art/toppings.webp" id="3_oiby5"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_w3q2b"]
-size = Vector2(64, 64)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_1vu75"]
-resource_local_to_scene = true
-resource_name = "Hurtbox"
-radius = 25.0
-
-[node name="Scoop" type="Area2D"]
-script = ExtResource("1_v802b")
-metadata/_edit_group_ = true
-
-[node name="Fullsize" type="Sprite2D" parent="."]
-visible = false
-self_modulate = Color(1, 0.447059, 1, 0.34902)
-texture = SubResource("PlaceholderTexture2D_w3q2b")
-centered = false
-metadata/_edit_lock_ = true
-
-[node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_5wkjs")
+[node name="Sprite" type="Sprite2D"]
+texture = ExtResource("1_yegwg")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 64)
+script = ExtResource("2_xp8n7")
 
 [node name="Topping" type="Sprite2D" parent="."]
-texture = ExtResource("3_exi5v")
+texture = ExtResource("3_oiby5")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 64)
-
-[node name="Hurtbox" type="CollisionShape2D" parent="."]
-position = Vector2(32, 32)
-shape = SubResource("CircleShape2D_1vu75")
-debug_color = Color(0.964706, 0, 0.290196, 0.419608)
-metadata/_edit_lock_ = true
