@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bg4rmav4t1tg1"]
+[gd_scene load_steps=10 format=3 uid="uid://bg4rmav4t1tg1"]
 
 [ext_resource type="Texture2D" uid="uid://cuqgobre5myrq" path="res://assets/art/adee.webp" id="1_l46y3"]
 [ext_resource type="Script" path="res://game/objects/player.gd" id="1_pd6et"]
@@ -44,6 +44,9 @@ animations = [{
 radius = 26.0
 height = 60.0
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ukvu2"]
+size = Vector2(64, 64)
+
 [node name="Player" type="Area2D"]
 script = ExtResource("1_pd6et")
 metadata/_edit_group_ = true
@@ -65,3 +68,22 @@ position = Vector2(32, 32)
 shape = SubResource("CapsuleShape2D_y3pws")
 debug_color = Color(0.992157, 0, 0.247059, 0.419608)
 metadata/_edit_lock_ = true
+
+[node name="Shield" type="Node2D" parent="."]
+
+[node name="A" type="Sprite2D" parent="Shield"]
+visible = false
+self_modulate = Color(0, 1, 1, 0.470588)
+texture = SubResource("PlaceholderTexture2D_ukvu2")
+centered = false
+
+[node name="B" type="Sprite2D" parent="Shield"]
+visible = false
+self_modulate = Color(1, 0, 0, 0.470588)
+texture = SubResource("PlaceholderTexture2D_ukvu2")
+centered = false
+
+[node name="Timer" type="Timer" parent="Shield"]
+wait_time = 2.5
+
+[connection signal="timeout" from="Shield/Timer" to="." method="_on_shield_timeout"]

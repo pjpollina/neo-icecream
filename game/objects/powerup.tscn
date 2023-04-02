@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1vr4r0nqnmta"]
+
+[ext_resource type="Script" path="res://game/objects/powerup.gd" id="1_a5n0u"]
+[ext_resource type="Texture2D" uid="uid://puoyqtb2jfd7" path="res://assets/art/powerups.webp" id="2_7cf8a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a3l2g"]
+resource_local_to_scene = true
+resource_name = "Hurtbox"
+radius = 31.0
+
+[node name="PowerUp" type="Area2D"]
+script = ExtResource("1_a5n0u")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_7cf8a")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("CircleShape2D_a3l2g")
+debug_color = Color(0, 0.596078, 0.623529, 0.419608)
