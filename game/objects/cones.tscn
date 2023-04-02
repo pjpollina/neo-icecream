@@ -1,0 +1,154 @@
+[gd_scene load_steps=5 format=3 uid="uid://bu0ps178fac5m"]
+
+[ext_resource type="Texture2D" uid="uid://bi8lhiay4i1cv" path="res://assets/art/cone.webp" id="1_fp8h0"]
+[ext_resource type="Script" path="res://game/objects/cones.gd" id="1_o7res"]
+[ext_resource type="Texture2D" uid="uid://d28twtgr684hw" path="res://assets/art/scoops.webp" id="2_h3ysi"]
+[ext_resource type="Script" path="res://game/objects/scoop.gd" id="3_u0jdl"]
+
+[node name="Cones" type="Node2D"]
+script = ExtResource("1_o7res")
+
+[node name="Cones" type="CanvasGroup" parent="."]
+position = Vector2(0.5, 0)
+
+[node name="A" type="Sprite2D" parent="Cones"]
+position = Vector2(0, 42)
+texture = ExtResource("1_fp8h0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="B" type="Sprite2D" parent="Cones"]
+position = Vector2(64, 42)
+texture = ExtResource("1_fp8h0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="C" type="Sprite2D" parent="Cones"]
+position = Vector2(128, 42)
+texture = ExtResource("1_fp8h0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="D" type="Sprite2D" parent="Cones"]
+position = Vector2(192, 42)
+texture = ExtResource("1_fp8h0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="E" type="Sprite2D" parent="Cones"]
+position = Vector2(256, 42)
+texture = ExtResource("1_fp8h0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="F" type="Sprite2D" parent="Cones"]
+position = Vector2(320, 42)
+texture = ExtResource("1_fp8h0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="G" type="Sprite2D" parent="Cones"]
+position = Vector2(384, 42)
+texture = ExtResource("1_fp8h0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="H" type="Sprite2D" parent="Cones"]
+position = Vector2(448, 42)
+texture = ExtResource("1_fp8h0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="I" type="Sprite2D" parent="Cones"]
+position = Vector2(512, 42)
+texture = ExtResource("1_fp8h0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="Scoops" type="CanvasGroup" parent="."]
+
+[node name="A" type="Sprite2D" parent="Scoops"]
+texture = ExtResource("2_h3ysi")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+script = ExtResource("3_u0jdl")
+
+[node name="B" type="Sprite2D" parent="Scoops"]
+position = Vector2(64, 0)
+texture = ExtResource("2_h3ysi")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+script = ExtResource("3_u0jdl")
+
+[node name="C" type="Sprite2D" parent="Scoops"]
+position = Vector2(128, 0)
+texture = ExtResource("2_h3ysi")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+script = ExtResource("3_u0jdl")
+
+[node name="D" type="Sprite2D" parent="Scoops"]
+position = Vector2(192, 0)
+texture = ExtResource("2_h3ysi")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+script = ExtResource("3_u0jdl")
+
+[node name="E" type="Sprite2D" parent="Scoops"]
+position = Vector2(256, 0)
+texture = ExtResource("2_h3ysi")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+script = ExtResource("3_u0jdl")
+
+[node name="F" type="Sprite2D" parent="Scoops"]
+position = Vector2(320, 0)
+texture = ExtResource("2_h3ysi")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+script = ExtResource("3_u0jdl")
+
+[node name="G" type="Sprite2D" parent="Scoops"]
+position = Vector2(384, 0)
+texture = ExtResource("2_h3ysi")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+script = ExtResource("3_u0jdl")
+
+[node name="H" type="Sprite2D" parent="Scoops"]
+position = Vector2(448, 0)
+texture = ExtResource("2_h3ysi")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+script = ExtResource("3_u0jdl")
+
+[node name="I" type="Sprite2D" parent="Scoops"]
+position = Vector2(512, 0)
+texture = ExtResource("2_h3ysi")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+script = ExtResource("3_u0jdl")
+
+[node name="LoadDelay" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="LoadDelay" to="." method="_on_load_proc"]

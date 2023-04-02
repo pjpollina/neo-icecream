@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://bg4rmav4t1tg1"]
+
+[ext_resource type="Texture2D" uid="uid://cuqgobre5myrq" path="res://assets/art/adee.webp" id="1_l46y3"]
+[ext_resource type="Script" path="res://game/objects/player.gd" id="1_pd6et"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7buj"]
+atlas = ExtResource("1_l46y3")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtjis"]
+atlas = ExtResource("1_l46y3")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i37xn"]
+atlas = ExtResource("1_l46y3")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2o56"]
+atlas = ExtResource("1_l46y3")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_clnua"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_l7buj")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_jtjis")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_i37xn")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_w2o56")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3pws"]
+radius = 26.0
+height = 60.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_pd6et")
+metadata/_edit_group_ = true
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_clnua")
+frame_progress = 0.34648
+centered = false
+
+[node name="Splatter" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_l46y3")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 64)
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("CapsuleShape2D_y3pws")
+debug_color = Color(0.992157, 0, 0.247059, 0.419608)
+metadata/_edit_lock_ = true
