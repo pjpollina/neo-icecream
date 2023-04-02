@@ -1,0 +1,125 @@
+[gd_scene load_steps=3 format=3 uid="uid://bromiibhvm4oy"]
+
+[ext_resource type="Script" path="res://game/objects/level_popup.gd" id="1_0dqoo"]
+[ext_resource type="Texture2D" uid="uid://cyfes76h3ywb4" path="res://assets/gui/level_01.webp" id="1_vcsd7"]
+
+[node name="LevelPopup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0dqoo")
+metadata/_edit_group_ = true
+
+[node name="Overlay" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_right = 300.0
+offset_bottom = 800.0
+grow_horizontal = 2
+
+[node name="Foreground" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -240.0
+offset_right = 300.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vcsd7")
+
+[node name="Contents" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+metadata/_edit_group_ = true
+
+[node name="Level" type="Label" parent="Contents"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -74.5
+offset_right = 74.5
+offset_bottom = 53.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
+theme_override_font_sizes/font_size = 48
+text = "LEVEL %d"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Flavor" type="Label" parent="Contents"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -74.5
+offset_top = 50.0
+offset_right = 74.5
+offset_bottom = 103.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0.356863, 1)
+theme_override_font_sizes/font_size = 24
+text = "%s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quota" type="Label" parent="Contents"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.5
+offset_right = 20.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
+theme_override_font_sizes/font_size = 32
+text = "Dodge %d Scoops
+to proceed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CTC" type="Label" parent="Contents"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -159.5
+offset_top = -80.0
+offset_right = 159.5
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.372549, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Click anywhere to continue..."
+horizontal_alignment = 1
+vertical_alignment = 1

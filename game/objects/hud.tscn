@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctfel6bg815yd"]
+
+[ext_resource type="Script" path="res://game/objects/hud.gd" id="1_0mbde"]
+
+[sub_resource type="Theme" id="Theme_v4siy"]
+default_font_size = 20
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_v4siy")
+script = ExtResource("1_0mbde")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0823529, 0.258824, 0.423529, 1)
+
+[node name="Lives" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = -14.5
+offset_right = 150.0
+offset_bottom = 14.5
+grow_vertical = 2
+text = "Lives: %d"
+vertical_alignment = 1
+
+[node name="Scoops" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 150.0
+offset_top = -14.5
+offset_right = 330.0
+offset_bottom = 14.5
+grow_vertical = 2
+text = "Scoops: %d/%d"
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 330.0
+offset_top = -14.5
+offset_right = 480.0
+offset_bottom = 14.5
+grow_vertical = 2
+text = "Score: %s"
+vertical_alignment = 1
