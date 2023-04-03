@@ -43,6 +43,7 @@ func size_micro() -> void:
 func activate_shield() -> void:
   shield_state = 1
   $Shield/A.show()
+  $Shield/B.hide()
   $Shield/Timer.start(2.5)
 
 func _on_shield_timeout():
@@ -54,4 +55,5 @@ func _on_shield_timeout():
     Audio.play_sfx("bonus_pickup")
   else:
     shield_state = -1
+    $Shield/A.hide()
     $Shield/B.hide()

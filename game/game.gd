@@ -1,205 +1,220 @@
-## Main game class
 extends Node
 
-const scoop = preload("res://game/objects/scoop.tscn")
+const _Bullet  = preload("res://game/objects/bullet.tscn")
+const _PowerUp = preload("res://game/objects/powerup.tscn")
 
-## GAME STATE ########################################
+@onready var player = $Player
+
+## Player state
+var lives: int = 3
+var score: int = 0
+var level: Scoop.Flavor = Scoop.Flavor.Strawberry
+
+## Reset on new level
+var dodges: int = 0
+
+## Reset on screen clear
+var last_firing_pos: int = -1
+var powerup_speed_offset: float = 0.0
+
+## ###################################################
+## Shot Info ##
 ##
-var lives:  int  # The player's life count
-var score:  int  # Current score
-var dodges: int  # Scoops successfully dodged
 
-var level: int
-var level_data: Level
-##
-## SHOOTER STATE #####################################
-##
-var loading:   int   # State of loader (8 = Done)
-var last_shot: int   # Most recent firing position
-var shooting:  bool  # Is shooter shooting?
+# Gets the amount of shots currently active
+func active_shots() -> int:
+  return get_tree().get_nodes_in_group("projectiles").size()
 
-# Initialize the state of the game
-func _ready():
-  lives = 3
-  score = 0
-  dodges = 0
+# Checks if there are enough shots to clear the level active
+func enough_shots() -> bool:
+  return level_scoop_count() <= (dodges + get_tree().get_nodes_in_group("projectiles").size())
 
-  shooting = false
-  loading = 0
-  last_shot = -1
+# Clear the screen of shots and cooldown
+func clear_shots() -> void:
+  get_tree().call_group("projectiles", "queue_free")
+  $ClearCooldown.start()
 
-  level = 1
-  load_level()
+# Checks if the level is clear of shots
+func check_level_clear() -> bool:
+  return enough_shots() && active_shots() < 1
 
-  $Player/Idle.play()
-
-  update_status_menu()
-
-func _process(_delta):
-  move_player()
-  update_bonus_fade()
-
-  if level_data.count < dodges && $Scoops.get_child_count() < 1:
-    shooting = false
-    level += 1
-    dodges = 0
-    load_level()
-    start_level()
-
-# Called after a projectile leaves the screen
-func _on_scoop_outta_here(topping):
+# Signal processor for shots hitting the despawn plane
+func _on_despawn_point_area_entered(area):
   dodges += 1
   score += 5
-  if topping > Scoop.Topping.None:
-    show_bonus_popup()
-    score += 10
-  update_status_menu()
+  if area as Bullet:
+    if area.topping != Scoop.Topping.None:
+      score += 10
+      $BonusPopup.ping("Topping Bonus!")
+      Audio.play_sfx("bonus_topping")
+  area.queue_free()
 
-# Remove all shot instances from the holder
-func clear_shots() -> void:
-  for child in $Scoops.get_children():
-    child.queue_free()
-  shooting = false
-  $Shooter/ClearCooldown.start()
-
-## PLAYER ############################################
+## ###################################################
+## Shot Maker
 ##
 
-func move_player():
-  $Player.position = $Player.get_global_mouse_position()
-  $Player.translate(Vector2(-32, -32))
-  $Player.position.x = clamp($Player.position.x, 0, 600-64)
-  $Player.position.y = clamp($Player.position.y, 0, 600-64)
+# Gets the base speed of scoops for this level
+func level_scoop_speed() -> float:
+  return 1.0 + (level / 10.0)
 
-func splat_player() -> void:
-  $Player/Splatter.region_rect.position.x = (level_data.flavor * 64)
-  $Player/Splatter.show()
-  $Player/Idle.hide()
+# Gets the amount of scoops for this level
+func level_scoop_count() -> int:
+  return 25 + (level * 25)
 
-func unsplat_player() -> void:
-  $Player/Splatter.hide()
-  $Player/Idle.show()
+# Generates a (semi) random position for a shot to spawn at
+func random_shot_spawnpoint() -> Vector2:
+  var roll = randi_range(0, 8)
+  while(roll == last_firing_pos):
+    roll = randi_range(0, 8)
+  last_firing_pos = roll
 
-# Called when player is hit
-func _on_player_area_entered(area):
-  if area as Scoop:
-    splat_player()
-    clear_shots()
-    lives -= 1
-    Audio.play_sfx("splatter")
-    update_status_menu()
+  var point = Vector2.ZERO
+  point.x = 12 + (roll * 64)
+  point.y = $Cones.position.y
+  return point
 
-## LEVEL #############################################
-##
-
-func load_level():
-  level_data = $LevelData.get_resource("level_%02d" % level)
-  $LevelPopup/Foreground.texture = load("res://assets/splashes/level_%02d.webp" % level)
-  $LevelPopup/Contents/Level.text = "Level %d" % level
-  $LevelPopup/Contents/Quota.text = "Dodge %d Scoops\nto proceed" % level_data.count
-
-func start_level():
-  update_status_menu()
-  for scoop in $Shooter/Scoops.get_children():
-    scoop.region_rect.position.x = (64 * level_data.flavor as int)
-  show_level_popup()
-
-## SHOOTER ###########################################
-##
-
-func _on_shot_cooldown_timeout():
-  if !shooting: return
-  if level_data.count < ($Scoops.get_child_count() + dodges): return
-
-  # Slightly randomize cooldown for next shot
-  $Shooter/ShotCooldown.wait_time = 0.25 + randf_range(-0.1, 0.5)
-
-  # Randomly choose which position to fire from
-  var pos = randi_range(0, 8)
-
-  # Skip firing this cycle if it would repeat the previous position
-  if pos == last_shot:
-    last_shot = -1
-    return
+# Signal processor for Shooter
+func _on_shooter_timeout():
+  if !$ClearCooldown.is_stopped() || enough_shots(): return
+  if randi_range(1, 30) == 25:
+    _make_powerup_shot()
   else:
-    last_shot = pos
+    _make_bullet_shot()
+  if level > Scoop.Flavor.Chocolate: _make_bullet_shot()
 
-  # Create the shot instance
-  var shot = scoop.instantiate()
-  shot.prepare(level_data.speed, level_data.flavor)
+# Construct and add a Bullet projectile
+func _make_bullet_shot() -> void:
+  var bullet = _Bullet.instantiate()
+  bullet.add_to_group("projectiles")
+  bullet.prepare(level_scoop_speed() + powerup_speed_offset, level)
+  bullet.position = random_shot_spawnpoint()
+  add_child(bullet)
 
-  # Put the shot in the right spot
-  shot.position = $Shooter/Positions.get_point_position(pos)
-  shot.translate($Shooter.position)
+# Construct and add a PowerUp projectile
+func _make_powerup_shot() -> void:
+  var bullet = _PowerUp.instantiate()
+  bullet.position = random_shot_spawnpoint()
+  bullet.add_to_group("projectiles")
+  add_child(bullet)
 
-  # FIRE!!!
-  $Scoops.add_child(shot)
-
-func _on_clear_cooldown_timeout():
-  # Trigger a game over when the player is out of lives
-  if(lives < 1):
-    Audio.play_sfx("ui_popup_show")
-    get_tree().change_scene_to_file("res://menus/game_over.tscn")
-
-  # Unsplatter the player
-  unsplat_player()
-
-  # Otherwise, resume
-  shooting = true
-  $Shooter/ClearCooldown.stop()
-
-## LOADER ############################################
+## ###################################################
+## Game Flow Control ##
 ##
 
-func _on_load_delay_timeout():
-  # Remove the timer once loading is done
-  if(loading >= $Shooter/Positions.points.size()):
-    $Shooter/LoadDelay.queue_free()
-    show_level_popup()
-    return
+# Updates the HUD element
+func update_hud() -> void:
+  $Hud.update_lives(lives)
+  $Hud.update_score(score)
+  $Hud.update_scoops(dodges, level_scoop_count())
 
-  # Load up the image
-  var sprite = $Shooter/Scoops/Base.duplicate()
-  sprite.position = $Shooter/Positions.points[loading]
-  $Shooter/Scoops.add_child(sprite)
-  sprite.show()
+# Loads the next level, or sends you to the win screen if on the final level
+func load_level() -> void:
+  if(level == Scoop.Flavor.Ube):
+    game_won()
+  else:
+    level += 1
+    prep_level()
 
-  # Play the sound
-  Audio.play_sfx("loading_cone", 0.1)
-
-  # Increment
-  loading += 1
-
-## STATUS MENU #######################################
-##
-
-func update_status_menu():
-  $StatusMenu/Lives.text = "Lives: %d" % lives
-  $StatusMenu/Score.text = "Score: %d" % score
-  $StatusMenu/Scoops.text = "Scoops: %d/%d" % [dodges, level_data.count]
-
-## BONUS POPUP #######################################
-##
-
-func show_bonus_popup():
-  $BonusPopup/FadeTimer.start(1.0)
-  Audio.play_sfx("bonus_topping")
-
-func update_bonus_fade():
-  $BonusPopup/Text.modulate.a = $BonusPopup/FadeTimer.time_left
-
-func _on_bonus_fade_timer_timeout():
-  $BonusPopup/FadeTimer.stop()
-
-## LEVEL POPUP #######################################
-##
-
-func show_level_popup():
-  $LevelPopup.show()
+# Prepares the next level
+func prep_level() -> void:
   Audio.play_sfx("ui_popup_show")
+  dodges = 0
+  reset_player()
+  $LevelPopup.prep(level)
+  $LevelPopup.show()
+  $Cones.set_scoops_flavor(level)
 
+# Called after the level popup is dismissed to begin firing
+func start_level() -> void:
+  Audio.play_sfx("ui_popup_hide")
+  $LevelPopup.hide()
+  $Shooter.start(0.375 + (randf_range(-0.1, 0.1)))
+
+# Sends you to the Game Over screen
+func game_over() -> void:
+  get_tree().change_scene_to_file("res://menus/game_over.tscn")
+
+# Sends you to the You Win screen
+func game_won() -> void:
+  var win = load("res://menus/game_over.tscn").instantiate()
+  win.get_node("Text").text = "You Win!"
+  var pk = PackedScene.new()
+  pk.pack(win)
+  get_tree().change_scene_to_packed(pk)
+
+# Signal processor for clear cooldown (The pause after a screen clear)
+func _on_clear_cooldown_timeout():
+  if lives > 0: player_recover()
+  else: game_over()
+
+# Signal processor for cones done loading (The intro animation)
+func _on_cones_done_loading():
+  prep_level()
+
+# Signal processor for level delay (Slight pause between level end & new level)
+func _on_level_delay_timeout():
+  load_level()
+
+# Signal processor for dismissing the level popup
 func _on_level_popup_gui_input(event):
   if event as InputEventMouseButton:
-    $LevelPopup.hide()
-    Audio.play_sfx("ui_popup_hide")
-    shooting = true
+    start_level()
+
+## ###################################################
+## Player Actions ##
+##
+
+# Called when the player is hit by a bad scoop
+func player_take_hit() -> void:
+  player.splat(level)
+  reset_player()
+  clear_shots()
+  lives -= 1
+  Audio.play_sfx("splatter")
+
+# Called when the player is hit by a good scoop
+func player_get_powerup(type: PowerUp.Type) -> void:
+  match type:
+    PowerUp.Type.Slowdown:      powerup_speed_offset -= 0.25
+    PowerUp.Type.Speedup:       powerup_speed_offset += 0.25
+    PowerUp.Type.Macro:         $Player.size_macro()
+    PowerUp.Type.Micro:         $Player.size_micro()
+    PowerUp.Type.Shield:        $Player.activate_shield()
+    PowerUp.Type.ExtraLife:     lives += 1
+    PowerUp.Type.CherryPoints:  score += 100
+    PowerUp.Type.FishPoints:    score += 250
+    PowerUp.Type.ManPoints:     score += 1000
+    PowerUp.Type.Bomb:          clear_shots()
+  PowerUp.powerup_sfx(type)
+  $BonusPopup.ping(PowerUp.powerup_message(type))
+
+# Reset transient player values
+func reset_player() -> void:
+  player.size_reset()
+  powerup_speed_offset = 0
+  player.shield_state = -1
+
+# Called after a clear if lives > 0
+func player_recover() -> void:
+  player.unsplat()
+
+# Signal processor for player collision
+func _on_player_area_entered(area):
+  if area as Bullet:
+    if $Player.shield_state > -1:
+      return
+    else:
+      player_take_hit()
+  elif area as PowerUp:
+    player_get_powerup(area.type)
+  area.queue_free()
+
+## ###################################################
+## Game Control
+##
+
+func _process(_delta):
+  update_hud()
+  if check_level_clear() && $LevelDelay.is_stopped():
+    $Shooter.stop()
+    $LevelDelay.start()

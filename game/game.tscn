@@ -1,304 +1,59 @@
-[gd_scene load_steps=26 format=3]
+[gd_scene load_steps=9 format=3 uid="uid://7123b56wqpuh"]
 
-[ext_resource type="Script" path="res://game/game.gd" id="1_sqkp8"]
-[ext_resource type="Texture2D" uid="uid://puu7tsir00m3" path="res://assets/background.webp" id="2_db4bk"]
-[ext_resource type="Texture2D" uid="uid://d28twtgr684hw" path="res://assets/art/scoops.webp" id="3_civih"]
-[ext_resource type="Texture2D" uid="uid://cuqgobre5myrq" path="res://assets/art/adee.webp" id="3_mxfaw"]
-[ext_resource type="Resource" uid="uid://cabj5v3hn2a3q" path="res://game/levels/level_01.tres" id="4_xa5ea"]
-[ext_resource type="Texture2D" uid="uid://cyfes76h3ywb4" path="res://assets/gui/level_01.webp" id="5_b2pgf"]
-[ext_resource type="Resource" uid="uid://bcqjh7eptehg6" path="res://game/levels/level_02.tres" id="5_s84nr"]
-[ext_resource type="Resource" uid="uid://bdjleppchpw3w" path="res://game/levels/level_03.tres" id="6_o88iw"]
-[ext_resource type="Resource" uid="uid://bs2dteb5aceen" path="res://game/levels/level_04.tres" id="7_v84aw"]
-[ext_resource type="Resource" uid="uid://d4n4b7mjssyht" path="res://game/levels/level_05.tres" id="8_6kpt3"]
-[ext_resource type="Resource" uid="uid://cod1is3lhti1y" path="res://game/levels/level_06.tres" id="9_hlc87"]
-[ext_resource type="Resource" uid="uid://bleb2dj0vur2" path="res://game/levels/level_07.tres" id="10_g2mgp"]
-[ext_resource type="Resource" uid="uid://bc4aafopvw10d" path="res://game/levels/level_08.tres" id="11_hy3vk"]
-[ext_resource type="Resource" uid="uid://ceg3577anwlc7" path="res://game/levels/level_09.tres" id="12_4s5pm"]
-[ext_resource type="Resource" uid="uid://cdihiiiry06sg" path="res://game/levels/level_10.tres" id="13_nfbm7"]
-[ext_resource type="Resource" uid="uid://c51uxg4p7iki1" path="res://game/levels/level_11.tres" id="14_2renc"]
-[ext_resource type="Resource" uid="uid://t4yr46bk3vmi" path="res://game/levels/level_12.tres" id="15_rjjm2"]
+[ext_resource type="PackedScene" uid="uid://bu0ps178fac5m" path="res://game/objects/cones.tscn" id="1_3s7xm"]
+[ext_resource type="Script" path="res://game/game.gd" id="1_x6eew"]
+[ext_resource type="Texture2D" uid="uid://mt0434bvj73k" path="res://assets/art/background.webp" id="2_gk24t"]
+[ext_resource type="PackedScene" uid="uid://bg4rmav4t1tg1" path="res://game/objects/player.tscn" id="2_xlxun"]
+[ext_resource type="PackedScene" uid="uid://bromiibhvm4oy" path="res://game/objects/level_popup.tscn" id="3_jvj3e"]
+[ext_resource type="PackedScene" uid="uid://ctfel6bg815yd" path="res://game/objects/hud.tscn" id="6_jaki4"]
+[ext_resource type="PackedScene" uid="uid://ctlcxlqnw08ig" path="res://game/objects/bonus_popup.tscn" id="7_kvbcg"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5w8oi"]
-size = Vector2(64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l7buj"]
-atlas = ExtResource("3_mxfaw")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jtjis"]
-atlas = ExtResource("3_mxfaw")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i37xn"]
-atlas = ExtResource("3_mxfaw")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w2o56"]
-atlas = ExtResource("3_mxfaw")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_clnua"]
-resource_local_to_scene = true
-animations = [{
-"frames": [{
-"duration": 1.5,
-"texture": SubResource("AtlasTexture_l7buj")
-}, {
-"duration": 1.5,
-"texture": SubResource("AtlasTexture_jtjis")
-}, {
-"duration": 1.5,
-"texture": SubResource("AtlasTexture_i37xn")
-}, {
-"duration": 1.5,
-"texture": SubResource("AtlasTexture_w2o56")
-}],
-"loop": true,
-"name": &"default",
-"speed": 12.0
-}]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3pws"]
-radius = 26.0
-height = 60.0
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4g51o"]
-size = Vector2(576, 64)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_snggs"]
+size = Vector2(600, 1)
 
 [node name="Game" type="Node"]
-script = ExtResource("1_sqkp8")
+script = ExtResource("1_x6eew")
 
-[node name="Background" type="Sprite2D" parent="."]
-texture = ExtResource("2_db4bk")
-centered = false
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 600.0
+offset_bottom = 800.0
+texture = ExtResource("2_gk24t")
 
-[node name="Player" type="Area2D" parent="."]
-metadata/_edit_group_ = true
+[node name="DespawnPoint" type="Area2D" parent="."]
+position = Vector2(300, -50)
 
-[node name="Fullsize" type="Sprite2D" parent="Player"]
-visible = false
-self_modulate = Color(0, 1, 0.45098, 0.34902)
-texture = SubResource("PlaceholderTexture2D_5w8oi")
-centered = false
-metadata/_edit_lock_ = true
+[node name="Barrier" type="CollisionShape2D" parent="DespawnPoint"]
+shape = SubResource("RectangleShape2D_snggs")
 
-[node name="Idle" type="AnimatedSprite2D" parent="Player"]
-sprite_frames = SubResource("SpriteFrames_clnua")
-frame_progress = 0.34648
-centered = false
-
-[node name="Splatter" type="Sprite2D" parent="Player"]
-visible = false
-texture = ExtResource("3_mxfaw")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 64, 64, 64)
-
-[node name="Hitbox" type="CollisionShape2D" parent="Player"]
-position = Vector2(32, 32)
-shape = SubResource("CapsuleShape2D_y3pws")
-debug_color = Color(0.992157, 0, 0.247059, 0.419608)
-metadata/_edit_lock_ = true
-
-[node name="Shooter" type="Node2D" parent="."]
+[node name="Cones" parent="." instance=ExtResource("1_3s7xm")]
 position = Vector2(12, 600)
 
-[node name="Positions" type="Line2D" parent="Shooter"]
-points = PackedVector2Array(0, 0, 64, 0, 128, 0, 192, 0, 256, 0, 320, 0, 384, 0, 448, 0, 512, 0)
-width = 0.0
+[node name="Player" parent="." instance=ExtResource("2_xlxun")]
 
-[node name="Scoops" type="CanvasGroup" parent="Shooter"]
+[node name="BonusPopup" parent="." instance=ExtResource("7_kvbcg")]
 
-[node name="Base" type="Sprite2D" parent="Shooter/Scoops"]
+[node name="LevelPopup" parent="." instance=ExtResource("3_jvj3e")]
 visible = false
-texture = ExtResource("3_civih")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 64, 64)
 
-[node name="LoadDelay" type="Timer" parent="Shooter"]
-wait_time = 0.1
-autostart = true
+[node name="Hud" parent="." instance=ExtResource("6_jaki4")]
+offset_top = 720.0
+offset_bottom = 0.0
 
-[node name="ShotCooldown" type="Timer" parent="Shooter"]
-wait_time = 0.25
-autostart = true
+[node name="Shooter" type="Timer" parent="."]
+wait_time = 0.5
 
-[node name="ClearCooldown" type="Timer" parent="Shooter"]
+[node name="ClearCooldown" type="Timer" parent="."]
 wait_time = 1.5
+one_shot = true
 
-[node name="DebugVisual" type="Sprite2D" parent="Shooter"]
-visible = false
-self_modulate = Color(1, 0.717647, 0.443137, 0.498039)
-show_behind_parent = true
-texture = SubResource("PlaceholderTexture2D_4g51o")
-centered = false
+[node name="LevelDelay" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
 
-[node name="Scoops" type="Node" parent="."]
-
-[node name="StatusMenu" type="HBoxContainer" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -26.0
-offset_right = 388.0
-grow_vertical = 0
-metadata/_edit_group_ = true
-
-[node name="Lives" type="Label" parent="StatusMenu"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-text = "Lives: 99"
-vertical_alignment = 1
-
-[node name="Scoops" type="Label" parent="StatusMenu"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-text = "Scoops: 999/999"
-vertical_alignment = 1
-
-[node name="Score" type="Label" parent="StatusMenu"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-text = "Score: 99,999"
-vertical_alignment = 1
-
-[node name="BonusPopup" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_group_ = true
-
-[node name="Text" type="Label" parent="BonusPopup"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -11.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Topping Bonus!"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="FadeTimer" type="Timer" parent="BonusPopup"]
-
-[node name="LevelPopup" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_group_ = true
-
-[node name="Overlay" type="Panel" parent="LevelPopup"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -300.0
-offset_right = 300.0
-offset_bottom = 800.0
-grow_horizontal = 2
-
-[node name="Foreground" type="TextureRect" parent="LevelPopup"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -240.0
-offset_right = 300.0
-offset_bottom = 240.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_b2pgf")
-
-[node name="Contents" type="Control" parent="LevelPopup"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -150.0
-offset_right = 200.0
-offset_bottom = 150.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-metadata/_edit_group_ = true
-
-[node name="Level" type="Label" parent="LevelPopup/Contents"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -74.5
-offset_right = 74.5
-offset_bottom = 53.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0, 0, 0, 0.4)
-theme_override_font_sizes/font_size = 48
-text = "LEVEL 1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Quota" type="Label" parent="LevelPopup/Contents"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -8.5
-offset_right = 20.0
-offset_bottom = 8.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 0.4)
-theme_override_font_sizes/font_size = 32
-text = "Dodge 999 Scoops
-to proceed"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CTC" type="Label" parent="LevelPopup/Contents"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -159.5
-offset_top = -80.0
-offset_right = 159.5
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0, 0, 0, 0.4)
-theme_override_font_sizes/font_size = 18
-text = "Click anywhere to continue..."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LevelData" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("level_01", "level_02", "level_03", "level_04", "level_05", "level_06", "level_07", "level_08", "level_09", "level_10", "level_11", "level_12"), [ExtResource("4_xa5ea"), ExtResource("5_s84nr"), ExtResource("6_o88iw"), ExtResource("7_v84aw"), ExtResource("8_6kpt3"), ExtResource("9_hlc87"), ExtResource("10_g2mgp"), ExtResource("11_hy3vk"), ExtResource("12_4s5pm"), ExtResource("13_nfbm7"), ExtResource("14_2renc"), ExtResource("15_rjjm2")]]
-
+[connection signal="area_entered" from="DespawnPoint" to="." method="_on_despawn_point_area_entered"]
+[connection signal="done_loading" from="Cones" to="." method="_on_cones_done_loading"]
 [connection signal="area_entered" from="Player" to="." method="_on_player_area_entered"]
-[connection signal="timeout" from="Shooter/LoadDelay" to="." method="_on_load_delay_timeout"]
-[connection signal="timeout" from="Shooter/ShotCooldown" to="." method="_on_shot_cooldown_timeout"]
-[connection signal="timeout" from="Shooter/ClearCooldown" to="." method="_on_clear_cooldown_timeout"]
-[connection signal="timeout" from="BonusPopup/FadeTimer" to="." method="_on_bonus_fade_timer_timeout"]
 [connection signal="gui_input" from="LevelPopup" to="." method="_on_level_popup_gui_input"]
+[connection signal="timeout" from="Shooter" to="." method="_on_shooter_timeout"]
+[connection signal="timeout" from="ClearCooldown" to="." method="_on_clear_cooldown_timeout"]
+[connection signal="timeout" from="LevelDelay" to="." method="_on_level_delay_timeout"]

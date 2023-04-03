@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Level" load_steps=2 format=3 uid="uid://bs2dteb5aceen"]
-
-[ext_resource type="Script" path="res://game/levels/level.gd" id="1_hqsso"]
-
-[resource]
-script = ExtResource("1_hqsso")
-count = 100
-speed = 1.3
-flavor = 3

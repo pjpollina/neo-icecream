@@ -13,6 +13,8 @@ func prepare(vel: float, flavor: Flavor) -> void:
   self.velocity = vel * randf_range(0.9, 1.1)
   self.flavor = flavor
   add_topping()
+  $Sprite.flavor = flavor
+  $Sprite.topping = topping
 
 # Move the scoop, emit the "outta_here" signal and despawn when offscreen
 func _process(delta):
